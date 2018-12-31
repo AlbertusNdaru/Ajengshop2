@@ -659,17 +659,29 @@ function cekout()
 				var error="";
 				for (var i=0 ; i<validate.length ; i++)
 				{
-					error=error+validate[i]['nama_barang']+' '+validate[i]['Error']+" , ";
+					error=error+validate[i]['nama_barang']+' '+validate[i]['Error']+"\n";
 				}
 				if(validate.length==validate[0]['totalitem'])
 				{
-			    alert(error);
-				window.location="<?php echo base_url().'penjualan'?>";
+				alert(error);
+				
+				$.ajax({
+					url  :"<?php echo base_url('penjualan/bataltransaksi');?>",
+					type : 'POST',
+					data : {
+						id : validate[0]['id']
+					},
+					success : function(data)
+					{
+						alert("Stok untuk semua barang yang anda pesan tidak mencukupi \nPesanan Dibatalkan.");
+						window.location="<?php echo base_url().'penjualan'?>";
+					}
+				});
 				}
 				else
 				{
 				alert(error);
-				alert("Barang ready stok berhasil dimasukan pada pesanan anda. \n Terima Kasih Sudah Berbelanja di Ajeng Shop");
+				alert("Barang ready stok berhasil dimasukan pada pesanan anda.\nTerima Kasih Sudah Berbelanja di Ajeng Shop");
 				window.location="<?php echo base_url().'penjualan'?>";
 				}
 				

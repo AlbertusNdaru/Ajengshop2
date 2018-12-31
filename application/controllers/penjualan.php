@@ -206,10 +206,11 @@ class penjualan extends CI_Controller{
         redirect("penjualan/cartdetail");
     }
     
-    function hapusdetailbatal()
+    function bataltransaksi()
     {
-        $this->model_transaksi->hapusdetailonlinebatal();
-        redirect("penjualan/chart");
+        $id=$this->input->post('id');
+        $this->model_transaksi->bataltransaksi($id);
+        
     }
     function hapusdetailadmin()
     {

@@ -40,8 +40,8 @@ class Product extends CI_Controller {
     { if (ceksession()){
         if(isset($_POST['submit'])){
             // proses barang
-            $this->model_barang->post();
-            $this->aksi_upload();
+            $id = $this->model_barang->post();
+            $this->aksi_upload($id);
             redirect('product');
             
         }
@@ -109,23 +109,30 @@ class Product extends CI_Controller {
         }
     }
 
-    public function aksi_upload(){
-		$config['upload_path']          = './assets/img_product/';
-        $config['allowed_types']        = '*';
-        $config['file_name']            = 'BRG_'.get_current_date().$_FILES['berkas']['name'];
-		//$config['max_size']             = 100;
-		//$config['max_width']            = 1024;
-		//$config['max_height']           = 768;
- 
-		$this->load->library('upload', $config);
- 
-		if ( ! $this->upload->do_upload('berkas')){
-			$error = array('error' => $this->upload->display_errors());
-			echo json_encode($error);
-		}else{
-            $data = array('upload_data' => $this->upload->data());
-            //redirect('barang');
+    public function aksi_upload($id){
+        foreach($_FILES['berkas'] as $dataimage)
+        {
+                $config['upload_path']          = './assets/img_product/';
+                $config['allowed_types']        = '*';
+                $config['file_name']            = 'BRG_'.get_current_date().$_FILES['berkas']['name'];
+                //$config['max_size']             = 100;
+                //$config['max_width']            = 1024;
+                //$config['max_height']           = 768;
+        
+                $this->load->library('upload', $config);
+        
+                if ( ! $this->upload->do_upload('berkas')){
+                    $error = array('error' => $this->upload->display_errors());
+                    echo json_encode($error);
+                }else{
+                    $data = array('upload_data' => $this->upload->data());
+                    
+                    //redirect('barang');
+                }
+
         }
+		
+        
     }
 
 }

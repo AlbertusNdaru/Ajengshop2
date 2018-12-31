@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 28, 2018 at 06:27 AM
--- Server version: 10.1.36-MariaDB
--- PHP Version: 5.6.38
+-- Waktu pembuatan: 31 Des 2018 pada 10.59
+-- Versi server: 10.1.36-MariaDB
+-- Versi PHP: 5.6.38
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -25,7 +25,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `barang`
+-- Struktur dari tabel `barang`
 --
 
 CREATE TABLE `barang` (
@@ -40,17 +40,17 @@ CREATE TABLE `barang` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `barang`
+-- Dumping data untuk tabel `barang`
 --
 
 INSERT INTO `barang` (`id_barang`, `nama_barang`, `id_kategori`, `merk`, `stok`, `harga`, `foto`, `status`) VALUES
-('BRG003', 'Dress merah', 'KTG003', 'H&M', 0, 120000, 'BRG_20181227_214517images-15.jpg', 'new'),
-('BRG004', 'Hem Wanita', 'KTG002', 'H&M', 0, 125000, 'BRG_20181227_220743images-9.jpg', 'new');
+('BRG003', 'Dress merah', 'KTG003', 'H&M', 1, 200000, 'BRG_20181227_214517images-15.jpg', 'bestseller'),
+('BRG004', 'Hem Wanita', 'KTG002', 'H&M', 2, 125000, 'BRG_20181227_220743images-9.jpg', 'bestseller');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `detail`
+-- Struktur dari tabel `detail`
 --
 
 CREATE TABLE `detail` (
@@ -64,63 +64,22 @@ CREATE TABLE `detail` (
   `status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `detail`
---
-
-INSERT INTO `detail` (`id_detail`, `id_transaksi`, `id_barang`, `harga`, `tanggal`, `jumlah`, `id_member`, `status`) VALUES
-('DTL001', 'TRS001', 'BRG001', 200000000, '2018-12-27 09:53:06', 4, 'MBR001', 1),
-('DTL002', 'TRS002', 'BRG001', 200000000, '2018-12-27 09:53:42', 4, 'MBR001', 1),
-('DTL003', 'TRS003', 'BRG002', 200000000, '2018-12-27 14:00:48', 1, 'MBR001', 1),
-('DTL004', 'TRS003', 'BRG001', 200000000, '2018-12-27 14:00:48', 1, 'MBR001', 1),
-('DTL005', 'TRS004', 'BRG001', 200000000, '2018-12-27 14:12:23', 1, 'MBR002', 1),
-('DTL006', 'TRS004', 'BRG002', 200000000, '2018-12-27 14:12:27', 1, 'MBR002', 1),
-('DTL007', 'TRS005', 'BRG003', 120000, '2018-12-27 14:57:50', 1, 'MBR002', 1),
-('DTL008', 'TRS006', 'BRG003', 120000, '2018-12-27 15:00:50', 1, 'MBR002', 1),
-('DTL009', 'TRS006', 'BRG003', 120000, '2018-12-27 15:00:50', 1, 'MBR002', 1),
-('DTL010', 'TRS007', 'BRG003', 120000, '2018-12-28 03:41:40', 2, 'MBR001', 1),
-('DTL011', 'TRS007', 'BRG004', 125000, '2018-12-28 03:48:39', 5, 'MBR001', 1),
-('DTL012', 'TRS008', 'BRG003', 120000, '2018-12-28 03:58:06', 1, 'MBR001', 1),
-('DTL013', 'TRS008', 'BRG004', 125000, '2018-12-28 03:58:10', 1, 'MBR001', 1),
-('DTL014', 'TRS009', 'BRG004', 125000, '2018-12-28 04:06:40', 1, 'MBR001', 1),
-('DTL015', 'TRS009', 'BRG003', 120000, '2018-12-28 04:32:19', 4, 'MBR001', 1),
-('DTL016', NULL, 'BRG003', 120000, '2018-12-28 04:32:31', 17, 'MBR001', 0);
+-- --------------------------------------------------------
 
 --
--- Triggers `detail`
+-- Struktur dari tabel `imageproduct`
 --
-DELIMITER $$
-CREATE TRIGGER `kurangggg` AFTER UPDATE ON `detail` FOR EACH ROW begin
-declare x,y,z integer;
-select old.jumlah from detail where id_detail=old.id_detail and old.id_transaksi IS null  into x;
-select new.jumlah from detail where id_detail=new.id_detail and old.id_transaksi IS null  into y;
-set z=y-x;
-update barang set stok=stok-z where id_barang=new.id_barang;
-end
-$$
-DELIMITER ;
-DELIMITER $$
-CREATE TRIGGER `kurangstokk` AFTER INSERT ON `detail` FOR EACH ROW begin
-declare x integer;
-select stok from barang where id_barang = new.id_barang into x;
-if x>0 then 
-update barang set stok = stok - new.jumlah 
-where id_barang=new.id_barang;
-end if;
-end
-$$
-DELIMITER ;
-DELIMITER $$
-CREATE TRIGGER `tambahhh` BEFORE DELETE ON `detail` FOR EACH ROW begin 
-update barang set stok= stok + old.jumlah where id_barang = old.id_barang;
-end
-$$
-DELIMITER ;
+
+CREATE TABLE `imageproduct` (
+  `id_image` varchar(10) NOT NULL,
+  `id_barang` varchar(10) NOT NULL,
+  `name` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `kategori`
+-- Struktur dari tabel `kategori`
 --
 
 CREATE TABLE `kategori` (
@@ -129,7 +88,7 @@ CREATE TABLE `kategori` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `kategori`
+-- Dumping data untuk tabel `kategori`
 --
 
 INSERT INTO `kategori` (`id_kategori`, `jenis_barang`) VALUES
@@ -140,7 +99,7 @@ INSERT INTO `kategori` (`id_kategori`, `jenis_barang`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `member`
+-- Struktur dari tabel `member`
 --
 
 CREATE TABLE `member` (
@@ -158,17 +117,17 @@ CREATE TABLE `member` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `member`
+-- Dumping data untuk tabel `member`
 --
 
 INSERT INTO `member` (`id_member`, `no_ktp`, `nama_member`, `email`, `password`, `pertanyaan`, `jawaban`, `isLogin`, `gagallogin`, `ktp`, `lastlogin`) VALUES
-('MBR001', '12131212321313213', 'Ndaru', 'kasurmabur@gmail.com', 'Jarumblack123!', 'a', 'b', 'N', 0, 'beach-exotic-holiday-248797.jp', '1545971539'),
+('MBR001', '12131212321313213', 'Ndaru', 'kasurmabur@gmail.com', 'Jarumblack123!', 'a', 'b', 'Y', 0, 'beach-exotic-holiday-248797.jp', '1546248448'),
 ('MBR002', 'Ajeng Wuriprastiwi', 'Ajeng Wuriprastiwi', 'ajeng300@gmail.com', 'Ajengmini123!', 'hallo', 'mini', 'N', 0, 'xxx.jpeg', '1545922850');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `transaksi`
+-- Struktur dari tabel `transaksi`
 --
 
 CREATE TABLE `transaksi` (
@@ -179,25 +138,10 @@ CREATE TABLE `transaksi` (
   `bukti_transaksi` varchar(500) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `transaksi`
---
-
-INSERT INTO `transaksi` (`id_transaksi`, `tanggal`, `total_bayar`, `Status`, `bukti_transaksi`) VALUES
-('TRS001', '2018-12-27 16:53:19', 800000000, 0, NULL),
-('TRS002', '2018-12-27 16:53:49', 800000000, 0, NULL),
-('TRS003', '2018-12-27 21:00:58', 400000000, 0, NULL),
-('TRS004', '2018-12-27 21:12:34', 400000000, 0, NULL),
-('TRS005', '2018-12-27 21:58:46', 120000, 0, NULL),
-('TRS006', '2018-12-27 22:01:06', 240000, 0, NULL),
-('TRS007', '2018-12-28 10:54:57', 865000, 0, NULL),
-('TRS008', '2018-12-28 10:58:21', 245000, 0, NULL),
-('TRS009', '2018-12-28 11:32:24', 605000, 0, NULL);
-
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user`
+-- Struktur dari tabel `user`
 --
 
 CREATE TABLE `user` (
@@ -214,11 +158,11 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `user`
+-- Dumping data untuk tabel `user`
 --
 
 INSERT INTO `user` (`id_user`, `email`, `Nama`, `password`, `pertanyaannya`, `jawabannya`, `level`, `isLogin`, `gagallogin`, `lastlogin`) VALUES
-('USR001', 'albertusndarukrismandoko@gmail.com', 'Albertus', '2108', 'a', 'b', 1, 'Y', 0, '1545967907'),
+('USR001', 'albertusndarukrismandoko@gmail.com', 'Albertus', '2108', 'a', 'b', 1, 'N', 0, '1545979255'),
 ('USR002', 'ajengwurip@gmail.com', 'Ajeng WP', 'Ajengmini123!', 'hallo', 'mini', 0, 'Y', 0, '1545923118');
 
 --
@@ -226,14 +170,14 @@ INSERT INTO `user` (`id_user`, `email`, `Nama`, `password`, `pertanyaannya`, `ja
 --
 
 --
--- Indexes for table `barang`
+-- Indeks untuk tabel `barang`
 --
 ALTER TABLE `barang`
   ADD PRIMARY KEY (`id_barang`),
   ADD KEY `fk_barang3` (`id_kategori`);
 
 --
--- Indexes for table `detail`
+-- Indeks untuk tabel `detail`
 --
 ALTER TABLE `detail`
   ADD PRIMARY KEY (`id_detail`),
@@ -242,40 +186,53 @@ ALTER TABLE `detail`
   ADD KEY `id_member` (`id_member`);
 
 --
--- Indexes for table `kategori`
+-- Indeks untuk tabel `imageproduct`
+--
+ALTER TABLE `imageproduct`
+  ADD PRIMARY KEY (`id_image`),
+  ADD KEY `id_barang` (`id_barang`);
+
+--
+-- Indeks untuk tabel `kategori`
 --
 ALTER TABLE `kategori`
   ADD PRIMARY KEY (`id_kategori`),
   ADD UNIQUE KEY `jenis_barang` (`jenis_barang`);
 
 --
--- Indexes for table `member`
+-- Indeks untuk tabel `member`
 --
 ALTER TABLE `member`
   ADD PRIMARY KEY (`id_member`);
 
 --
--- Indexes for table `transaksi`
+-- Indeks untuk tabel `transaksi`
 --
 ALTER TABLE `transaksi`
   ADD PRIMARY KEY (`id_transaksi`);
 
 --
--- Indexes for table `user`
+-- Indeks untuk tabel `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id_user`),
   ADD UNIQUE KEY `email` (`email`);
 
 --
--- Constraints for dumped tables
+-- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
 
 --
--- Constraints for table `detail`
+-- Ketidakleluasaan untuk tabel `detail`
 --
 ALTER TABLE `detail`
   ADD CONSTRAINT `detail_ibfk_1` FOREIGN KEY (`id_member`) REFERENCES `member` (`id_member`);
+
+--
+-- Ketidakleluasaan untuk tabel `imageproduct`
+--
+ALTER TABLE `imageproduct`
+  ADD CONSTRAINT `imageproduct_ibfk_1` FOREIGN KEY (`id_barang`) REFERENCES `barang` (`id_barang`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

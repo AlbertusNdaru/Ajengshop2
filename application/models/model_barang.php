@@ -77,6 +77,20 @@ class model_barang extends ci_model{
                             'harga'=>$harga,
                             'foto'=>'BRG_'.get_current_date().$_FILES['berkas']['name']);
         $this->db->insert('barang',$data);
+        return $id_barang;
+    }
+
+    function inserttabelproduct()
+    {
+        $query = "SELECT max(id_image) as maxKode from imageproduct";
+        $check = $this->db->query($query);
+        $data = $check->row();
+		$id_image = $data->maxKode;
+		$noUrut = (int) substr($id_image,3,3);
+		$noUrut++;
+		$char = "IMG";
+        $newID = $char. sprintf("%03s",$noUrut);
+        
     }
     
     function post_stok()

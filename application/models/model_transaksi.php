@@ -131,7 +131,11 @@ class model_transaksi extends ci_model
 		
     }
 
-    
+    function bataltransaksi($id)
+    {
+        $this->db->where('id_transaksi',$id);
+        $this->db->delete('transaksi');
+    }
 
     function insertpenjualan($totalbayar)
     {
@@ -157,7 +161,8 @@ class model_transaksi extends ci_model
                $this->hapusdetail($row->id_detail);
                array_push($validate,array('nama_barang'=>$row->nama_barang,
                                  'Error'=>'Stok Tidak Mencukupi',
-                                  'totalitem'=>count($pendingstok)));
+                                  'totalitem'=>count($pendingstok),
+                                 'id'=>$newID));
  
             }
             else
@@ -191,7 +196,8 @@ class model_transaksi extends ci_model
        $this->db->query("INSERT into transaksi(id_transaksi,total_bayar,status) values('".$newID."','".$totalbayar."',1)");
        $this->db->query("UPDATE detail set status=1 , id_transaksi='".$newID."' where status=0 and id_user='".$_SESSION['userdata']->id_user."' and date(tanggal)=date(now())");  
         	
-		
+        
+        
     }
 
     
