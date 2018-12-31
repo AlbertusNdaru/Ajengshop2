@@ -40,7 +40,7 @@
                             <td><?php echo $r->jenis_barang ?></td>
                             <td>Rp. <?php echo number_format($r->harga,2) ?></td>
                             <td style="text-align:center"><?php echo $r->stok ?></td>
-                            <td><img src="<?php echo base_url('assets/img_product/').$r->foto; ?>" width="60" height="80p"></td>
+                            <td><img src="<?php echo base_url('assets/img_product/').$r->name; ?>" width="60" height="80p"></td>
                             <td class="center">
                                 <?php echo anchor('product/edit/'.$r->id_barang,'Edit','class="btn btn-primary"'); ?> 
                                 <?php echo anchor('product/delete/'.$r->id_barang,'Delete','class="btn btn-danger"'); ?>

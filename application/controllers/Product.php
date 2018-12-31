@@ -41,7 +41,7 @@ class Product extends CI_Controller {
         if(isset($_POST['submit'])){
             // proses barang
             $id = $this->model_barang->post();
-            $this->aksi_upload($id);
+            $this->aksi_upload($id,$_FILES['berkas']);
             redirect('product');
             
         }
@@ -109,26 +109,38 @@ class Product extends CI_Controller {
         }
     }
 
-    public function aksi_upload($id){
-        foreach($_FILES['berkas'] as $dataimage)
-        {
-                $config['upload_path']          = './assets/img_product/';
-                $config['allowed_types']        = '*';
-                $config['file_name']            = 'BRG_'.get_current_date().$_FILES['berkas']['name'];
+    public function aksi_upload($id,$files){
+        $images = array();
+        $config['upload_path']          = './assets/img_product/';
+        $config['allowed_types']        = '*';
+        $this->load->library('upload', $config);
+        foreach($files['name'] as $key => $image)
+        { 
+            $_FILES['berkas[]']['name']= $files['name'][$key];
+            $_FILES['berkas[]']['type']= $files['type'][$key];
+            $_FILES['berkas[]']['tmp_name']= $files['tmp_name'][$key];
+            $_FILES['berkas[]']['error']= $files['error'][$key];
+            $_FILES['berkas[]']['size']= $files['size'][$key];
+
+            //echo $dataimage->name;
+               
+                $config['file_name']            = 'BRG_'.get_current_date().$image;
                 //$config['max_size']             = 100;
                 //$config['max_width']            = 1024;
                 //$config['max_height']           = 768;
         
-                $this->load->library('upload', $config);
+                $this->upload->initialize($config);
         
-                if ( ! $this->upload->do_upload('berkas')){
+                if ( ! $this->upload->do_upload('berkas[]')){
                     $error = array('error' => $this->upload->display_errors());
                     echo json_encode($error);
                 }else{
                     $data = array('upload_data' => $this->upload->data());
-                    
+                    $this->model_barang->inserttabelproduct($id,'BRG_'.get_current_date().$image);
                     //redirect('barang');
                 }
+
+                
 
         }
 		

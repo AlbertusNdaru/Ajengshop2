@@ -1,22 +1,20 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
--- https://www.phpmyadmin.net/
+-- version 4.2.7.1
+-- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 31 Des 2018 pada 10.59
--- Versi server: 10.1.36-MariaDB
--- Versi PHP: 5.6.38
+-- Generation Time: Dec 31, 2018 at 02:48 PM
+-- Server version: 5.6.20
+-- PHP Version: 5.5.15
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
 
 --
 -- Database: `ajengshop`
@@ -25,10 +23,10 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `barang`
+-- Table structure for table `barang`
 --
 
-CREATE TABLE `barang` (
+CREATE TABLE IF NOT EXISTS `barang` (
   `id_barang` varchar(10) NOT NULL,
   `nama_barang` varchar(20) NOT NULL,
   `id_kategori` varchar(10) NOT NULL,
@@ -39,21 +37,13 @@ CREATE TABLE `barang` (
   `status` varchar(20) NOT NULL DEFAULT 'new'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data untuk tabel `barang`
---
-
-INSERT INTO `barang` (`id_barang`, `nama_barang`, `id_kategori`, `merk`, `stok`, `harga`, `foto`, `status`) VALUES
-('BRG003', 'Dress merah', 'KTG003', 'H&M', 1, 200000, 'BRG_20181227_214517images-15.jpg', 'bestseller'),
-('BRG004', 'Hem Wanita', 'KTG002', 'H&M', 2, 125000, 'BRG_20181227_220743images-9.jpg', 'bestseller');
-
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `detail`
+-- Table structure for table `detail`
 --
 
-CREATE TABLE `detail` (
+CREATE TABLE IF NOT EXISTS `detail` (
   `id_detail` varchar(10) NOT NULL,
   `id_transaksi` varchar(10) DEFAULT NULL,
   `id_barang` varchar(10) NOT NULL,
@@ -67,10 +57,10 @@ CREATE TABLE `detail` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `imageproduct`
+-- Table structure for table `imageproduct`
 --
 
-CREATE TABLE `imageproduct` (
+CREATE TABLE IF NOT EXISTS `imageproduct` (
   `id_image` varchar(10) NOT NULL,
   `id_barang` varchar(10) NOT NULL,
   `name` varchar(200) NOT NULL
@@ -79,30 +69,21 @@ CREATE TABLE `imageproduct` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `kategori`
+-- Table structure for table `kategori`
 --
 
-CREATE TABLE `kategori` (
+CREATE TABLE IF NOT EXISTS `kategori` (
   `id_kategori` varchar(10) NOT NULL,
   `jenis_barang` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data untuk tabel `kategori`
---
-
-INSERT INTO `kategori` (`id_kategori`, `jenis_barang`) VALUES
-('KTG001', 'Baju Pria'),
-('KTG002', 'Baju Wanita'),
-('KTG003', 'Dress Women');
-
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `member`
+-- Table structure for table `member`
 --
 
-CREATE TABLE `member` (
+CREATE TABLE IF NOT EXISTS `member` (
   `id_member` varchar(10) NOT NULL,
   `no_ktp` varchar(25) NOT NULL,
   `nama_member` varchar(30) NOT NULL,
@@ -117,7 +98,7 @@ CREATE TABLE `member` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `member`
+-- Dumping data for table `member`
 --
 
 INSERT INTO `member` (`id_member`, `no_ktp`, `nama_member`, `email`, `password`, `pertanyaan`, `jawaban`, `isLogin`, `gagallogin`, `ktp`, `lastlogin`) VALUES
@@ -127,10 +108,10 @@ INSERT INTO `member` (`id_member`, `no_ktp`, `nama_member`, `email`, `password`,
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `transaksi`
+-- Table structure for table `transaksi`
 --
 
-CREATE TABLE `transaksi` (
+CREATE TABLE IF NOT EXISTS `transaksi` (
   `id_transaksi` varchar(10) NOT NULL,
   `tanggal` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `total_bayar` int(11) NOT NULL,
@@ -141,10 +122,10 @@ CREATE TABLE `transaksi` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `user`
+-- Table structure for table `user`
 --
 
-CREATE TABLE `user` (
+CREATE TABLE IF NOT EXISTS `user` (
   `id_user` varchar(10) NOT NULL,
   `email` varchar(40) NOT NULL,
   `Nama` varchar(30) NOT NULL,
@@ -158,7 +139,7 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `user`
+-- Dumping data for table `user`
 --
 
 INSERT INTO `user` (`id_user`, `email`, `Nama`, `password`, `pertanyaannya`, `jawabannya`, `level`, `isLogin`, `gagallogin`, `lastlogin`) VALUES
@@ -170,70 +151,62 @@ INSERT INTO `user` (`id_user`, `email`, `Nama`, `password`, `pertanyaannya`, `ja
 --
 
 --
--- Indeks untuk tabel `barang`
+-- Indexes for table `barang`
 --
 ALTER TABLE `barang`
-  ADD PRIMARY KEY (`id_barang`),
-  ADD KEY `fk_barang3` (`id_kategori`);
+ ADD PRIMARY KEY (`id_barang`), ADD KEY `fk_barang3` (`id_kategori`);
 
 --
--- Indeks untuk tabel `detail`
+-- Indexes for table `detail`
 --
 ALTER TABLE `detail`
-  ADD PRIMARY KEY (`id_detail`),
-  ADD KEY `fk_barang1` (`id_barang`),
-  ADD KEY `fk_transaksi1` (`id_transaksi`),
-  ADD KEY `id_member` (`id_member`);
+ ADD PRIMARY KEY (`id_detail`), ADD KEY `fk_barang1` (`id_barang`), ADD KEY `fk_transaksi1` (`id_transaksi`), ADD KEY `id_member` (`id_member`);
 
 --
--- Indeks untuk tabel `imageproduct`
+-- Indexes for table `imageproduct`
 --
 ALTER TABLE `imageproduct`
-  ADD PRIMARY KEY (`id_image`),
-  ADD KEY `id_barang` (`id_barang`);
+ ADD PRIMARY KEY (`id_image`), ADD KEY `id_barang` (`id_barang`);
 
 --
--- Indeks untuk tabel `kategori`
+-- Indexes for table `kategori`
 --
 ALTER TABLE `kategori`
-  ADD PRIMARY KEY (`id_kategori`),
-  ADD UNIQUE KEY `jenis_barang` (`jenis_barang`);
+ ADD PRIMARY KEY (`id_kategori`), ADD UNIQUE KEY `jenis_barang` (`jenis_barang`);
 
 --
--- Indeks untuk tabel `member`
+-- Indexes for table `member`
 --
 ALTER TABLE `member`
-  ADD PRIMARY KEY (`id_member`);
+ ADD PRIMARY KEY (`id_member`);
 
 --
--- Indeks untuk tabel `transaksi`
+-- Indexes for table `transaksi`
 --
 ALTER TABLE `transaksi`
-  ADD PRIMARY KEY (`id_transaksi`);
+ ADD PRIMARY KEY (`id_transaksi`);
 
 --
--- Indeks untuk tabel `user`
+-- Indexes for table `user`
 --
 ALTER TABLE `user`
-  ADD PRIMARY KEY (`id_user`),
-  ADD UNIQUE KEY `email` (`email`);
+ ADD PRIMARY KEY (`id_user`), ADD UNIQUE KEY `email` (`email`);
 
 --
--- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
+-- Constraints for dumped tables
 --
 
 --
--- Ketidakleluasaan untuk tabel `detail`
+-- Constraints for table `detail`
 --
 ALTER TABLE `detail`
-  ADD CONSTRAINT `detail_ibfk_1` FOREIGN KEY (`id_member`) REFERENCES `member` (`id_member`);
+ADD CONSTRAINT `detail_ibfk_1` FOREIGN KEY (`id_member`) REFERENCES `member` (`id_member`);
 
 --
--- Ketidakleluasaan untuk tabel `imageproduct`
+-- Constraints for table `imageproduct`
 --
 ALTER TABLE `imageproduct`
-  ADD CONSTRAINT `imageproduct_ibfk_1` FOREIGN KEY (`id_barang`) REFERENCES `barang` (`id_barang`);
-COMMIT;
+ADD CONSTRAINT `imageproduct_ibfk_1` FOREIGN KEY (`id_barang`) REFERENCES `barang` (`id_barang`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

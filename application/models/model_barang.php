@@ -33,7 +33,7 @@ class model_barang extends ci_model{
 
     function tampilkan_data_paging($config, $halaman)
     {
-        $query= "SELECT a.*, b.jenis_barang FROM Barang as a inner join kategori as b on b.id_kategori = a.id_kategori limit ".($halaman * $config['per_page']).", ".$config['per_page']." ";
+        $query= "SELECT distinct(a.id_barang)as id, a.*, b.jenis_barang , c.name FROM Barang as a inner join kategori as b on b.id_kategori = a.id_kategori  inner join imageproduct as c on a.id_barang = c.id_barang limit ".($halaman * $config['per_page']).", ".$config['per_page']." ";
         return $this->db->query($query);
     }
 
@@ -75,12 +75,12 @@ class model_barang extends ci_model{
                             'merk'=> $merk,
                             'stok'=>$stok,
                             'harga'=>$harga,
-                            'foto'=>'BRG_'.get_current_date().$_FILES['berkas']['name']);
+                            'foto'=>'BRG_'.get_current_date().$_FILES['berkas']['name'][0]);
         $this->db->insert('barang',$data);
         return $id_barang;
     }
 
-    function inserttabelproduct()
+    function inserttabelproduct($id,$nama)
     {
         $query = "SELECT max(id_image) as maxKode from imageproduct";
         $check = $this->db->query($query);
@@ -90,7 +90,10 @@ class model_barang extends ci_model{
 		$noUrut++;
 		$char = "IMG";
         $newID = $char. sprintf("%03s",$noUrut);
-        
+        $data       = array('id_image'=>$newID,
+                            'id_barang'=>$id,
+                            'name'=> $nama);
+        $this->db->insert('imageproduct',$data);
     }
     
     function post_stok()
