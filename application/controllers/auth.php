@@ -28,8 +28,8 @@ class auth extends CI_Controller{
            
             $email   =   $this->input->post('email');
             $password   =   $this->input->post('password');
-            $cek= ceklastlogin($email);
-            
+            if(ceklastlogin($email))
+            {
                 $hasil=  $this->model_operator->login($email,$password);
                 if($hasil==0)
                 {
@@ -49,7 +49,7 @@ class auth extends CI_Controller{
                {
                    echo 3;
                }
-               
+            } 
             
            
             

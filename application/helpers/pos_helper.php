@@ -44,12 +44,14 @@ function ceklastlogin($email=null)
         if (abs(time()-($lastlogin->lastlogin))>$login_session_duration)
         {
         $CI->db->query("update user set isLogin='N', gagallogin=0 where email='".$email."'"); 
-
+        return true;
         }
     }
     else{
-        $CI->load->view('admin/login');
+        //$CI->load->view('admin/login');
+        return false;
     }
+
 }
 
 function ceklastloginuser($email=null)
@@ -61,12 +63,12 @@ function ceklastloginuser($email=null)
         if (abs(time()-($lastlogin->lastlogin))>$login_session_duration)
         {
           $CI->db->query("update member set isLogin='N', gagallogin=0 where email='".$email."'"); 
-    
+          return true;
         }
     }
     else
     {
-        $CI->load->view('user/login');
+        return false;
     }
     
 }

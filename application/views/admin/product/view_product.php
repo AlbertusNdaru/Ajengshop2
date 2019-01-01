@@ -27,7 +27,7 @@
                     <th>Jenis Barang</th>
                     <th>Harga</th>
                     <th style="text-align:center">Stok</th>
-                    <th>Foto<th>
+                    <th>Foto</th>
                     <th>Aksi</th>
                 </tr>
                 </thead>

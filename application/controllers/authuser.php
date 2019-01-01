@@ -17,7 +17,7 @@ class authuser extends CI_Controller{
            }
            else
            { 
-             $this->load->view('user/login');
+            $this->load->view('user/login');
            }
     }
 
@@ -31,35 +31,38 @@ class authuser extends CI_Controller{
            
             $email   =   $this->input->post('email');
             $password   =   $this->input->post('password');
-            $cek= ceklastloginuser($email);
-            $hasil=  $this->model_operator->loginuser($email,$password);
-            if (isset($_SESSION['cart']))
+            if (ceklastloginuser($email))
             {
-                $datatransaksi = $this->session->userdata('cart');
-                foreach($datatransaksi as $data)
+                $hasil=  $this->model_operator->loginuser($email,$password);
+                if (isset($_SESSION['cart']))
                 {
-                    $this->model_transaksi->insertdetailfromnologin($data);
+                    $datatransaksi = $this->session->userdata('cart');
+                    foreach($datatransaksi as $data)
+                    {
+                        $this->model_transaksi->insertdetailfromnologin($data);
+                    }
                 }
+                if($hasil==0)
+                {
+                    // update last login
+                  echo 0;
+          
+                }
+                else if($hasil==1)
+                {
+                    echo 1;
+                }
+               else if($hasil==2)
+               {
+                   echo 2;
+               }
+               else 
+               {
+                   echo 3;
+               }
+               
+                
             }
-            if($hasil==0)
-            {
-                // update last login
-              echo 0;
-      
-            }
-            else if($hasil==1)
-            {
-                echo 1;
-            }
-           else if($hasil==2)
-           {
-               echo 2;
-           }
-           else 
-           {
-               echo 3;
-           }
-           
             
   
        
