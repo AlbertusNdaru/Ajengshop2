@@ -26,7 +26,12 @@ class email extends CI_Controller{
         $this->email->to($email);
       
         $this->email->subject('Forget Password');
-        $this->email->message('Link reset password for Admin Ajeng Shop '.$email.'.');
+        $this->email->message('Link reset password for Admin Ajeng Shop '.$email.'.
+
+        '.base_url().'get_member_byemail_fromemail?email='.$email. '.
+
+        Regard, 
+        Admin Ajeng Shop');
         if (!$this->email->send()) {
             // Raise error message
             show_error($this->email->print_debugger());
@@ -39,7 +44,8 @@ class email extends CI_Controller{
 
     function sendMailUser()
     {
-        $email = $_POST['email'];
+        $id = $this->input->post('id');
+        $email= $this->input->post('email');
         $config = Array(
             'protocol' => 'smtp',
             'smtp_host' => 'ssl://smtp.googlemail.com',
@@ -56,7 +62,7 @@ class email extends CI_Controller{
         $this->email->to($email);
       
         $this->email->subject('Forget Password');
-        $this->email->message('Link reset password for Member Ajeng Shop '.$email.'.');
+        $this->email->message("Link reset password for User Ajeng Shop.\r\n".base_url()."operator/get_member_byemail_fromemail?id=".$id);
         if (!$this->email->send()) {
             // Raise error message
             show_error($this->email->print_debugger());

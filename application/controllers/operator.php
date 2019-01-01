@@ -22,18 +22,11 @@ class operator extends ci_controller{
     
     function post()
     {
-        
-       
-            $this->load->view('admin/registeradmin');
-        
-
+        $this->load->view('admin/registeradmin');
     }
     function postuser()
     {
-        
-       
-            $this->load->view('user/memberregister');
-       
+        $this->load->view('user/memberregister');
     }
     
     function edit()
@@ -80,6 +73,54 @@ class operator extends ci_controller{
         echo json_encode($data['record']);
         //$this->load->view('operator/lihat_data',$data);
         //$this->template->load('template','operator/member',$data);
+    }
+
+    function get_member_byemail()
+    {
+        $email= $this->input->get('email');
+        $data['member']= $this->model_operator->get_one_user($email);
+        //echo json_encode($data['member']);
+        $this->load->view('user/lupapassword',$data);
+    }
+
+    function get_member_byemail_fromemail()
+    {
+        $id= $this->input->get('id');
+        $data['member']= $this->model_operator->get_one_user_byid($id);
+        //echo json_encode($data['member']);
+        $this->load->view('user/lupapasswordemail',$data);
+    }
+
+
+    function cekJawaban()
+    {
+        $email= $this->input->post('email');
+        $pertanyaan= $this->input->post('pertanyaan');
+        $jawaban= $this->input->post('jawaban');
+        $data= $this->model_operator->get_one_user($email,$pertanyaan,$jawaban);
+        if ($data)
+        {
+            echo 1;
+        }
+        else
+        {
+            echo 0;
+        }
+    }
+
+    function resetpassworduser()
+    {
+        $email= $this->input->post('email');
+        $password= $this->input->post('password');
+        $data = $this->model_operator->resetpassworduser($email,$password);
+        if ($data)
+        {
+            echo 1;
+        }
+        else
+        {
+            echo 0;
+        }
     }
 
     

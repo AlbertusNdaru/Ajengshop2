@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Ajeng Shop Admin</title>
+  <title>LUPA PASSWORD</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
@@ -30,32 +30,28 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="../../index2.html"><b>Admin Ajeng Shop</b></a>
+    <a href="#"><b>Member Ajeng Shop</b></a>
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
-    <p class="login-box-msg">Sign in to start your session</p>
+    <p class="login-box-msg">Forget Password</p>
 
 
       <div class="form-group has-feedback">
-        <input required id="email" type="email" name="EMAIL" class="form-control" placeholder="Email">
+        <input required readonly id="email" type="email" name="EMAIL" class="form-control" placeholder="Email" value="<?php echo $member->email?>">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
-      <div class="form-group has-feedback">
-        <input id="password"  type="password" name="PASSWORD" class="form-control" placeholder="Password">
+      <div class="form-group has-feedback" id="pass">
+        <input required id="password" type="password" class="form-control" placeholder="Password" >
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
-      <div class="row">
-        <div class="col-xs-8">
-          <div class="checkbox icheck">
-            <label>
-              <input type="checkbox"> Remember Me
-            </label>
-          </div>
-        </div>
+      <div class="form-group has-feedback" id="valpass">
+        <input required id="validatepassword" type="password" class="form-control"  placeholder="Retype password">
+        <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
+      </div>
         <!-- /.col -->
-        <div class="col-xs-4">
-          <button  onclick="login()" class="btn btn-primary btn-block btn-flat">Sign In</button>
+        <div id="btnreset">
+          <button style="margin-bottom:10px;" onclick="ResetPassword()" class="btn btn-primary btn-block btn-flat">Reset Password</button>
         </div>
         <!-- /.col -->
       </div>
@@ -70,9 +66,7 @@
     </div> -->
     <!-- /.social-auth-links -->
 
-    <button class="btn btn-primary" onclick="lupa()">I forgot my password</button><br>
-    <a href="<?php echo base_url()?>operator/post" class="text-center">Register a new membership</a>
-
+   
   </div>
   <!-- /.login-box-body -->
 </div>
@@ -85,44 +79,54 @@
 <!-- iCheck -->
 <script src="<?php echo base_url('').'assets/'?>plugins/iCheck/icheck.min.js"></script>
 <script>
-  $(function () {
-    $('input').iCheck({
-      checkboxClass: 'icheckbox_square-blue',
-      radioClass: 'iradio_square-blue',
-      increaseArea: '20%' /* optional */
-    });
-  });
 
-  function lupa()
+  function ResetPassword()
   {
-     var email = $('#email').val();
-     window.location="<?php echo base_url().'operator/get_member_byemail?email='?>"+email+""
-  }
-
-  function login()
- {
-    var email= $('#email').val();
-     var password = $('#password').val();
-
-        $.ajax({
-        url  :"<?php echo base_url('auth/login');?>",
+    var nama = $('#nama').val();
+   var validatepassword = $('#validatepassword').val();
+   var email = $('#email').val();
+   var password = $('#password').val();
+   var regex = /^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/;
+   var regexpass = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$^+=!*()@%&]).{8,}$/;
+   if (!regex.test(email))
+    {
+       alert('Format email salah');
+    }
+    else if (password != validatepassword)
+    {
+      alert('Password Tidak Sesuai');
+    }
+    else if (!regexpass.test(password))
+    {
+      alert('Format Password Salah\nPassword minimum 8 karakter terdiri minimal 1 huruf besar, 1 huruf kecil, 1 simbol, 1 angka!');
+    }
+    else
+    {
+      $.ajax({
+        url  :"<?php echo base_url('operator/resetpassworduser');?>",
         type : 'POST',
         data : {
-          email : email, 
-          password : password,
-          submit  : "isi"
+          email : email,
+          password : password
         },
          success : function(data)
-        {
-          console.log(data);
-            if (data==3){ window.location="<?php echo base_url().'product'?>";}
-            if (data==1){ alert('Akun sudah digunakan untuk Login');}
-            if (data==2){ alert('Akun diblokir karena kesalahan password lebih dari 3 kali');}
-            if (data==0){ alert('Email atau password salah');}
+        { console.log(data);
+          if (data==1)
+          {
+             alert('Password Berhasil diganti');
+             window.location="<?php echo base_url().'loginuser'?>"
+          }
+          else
+          {
+            alert('Error');
+          }
         }
      })
-     
- }
+    }
+    
+
+  }
+
 </script>
 </body>
 </html>

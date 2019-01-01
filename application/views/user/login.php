@@ -118,8 +118,7 @@
      
  }
 
- 
- function lupa()
+  function lupa()
   {
     var email= $('#email').val();
     if (email=="")
@@ -128,19 +127,33 @@
     }
     else
     {
-      $.ajax({
-        url  :"<?php echo base_url('email/sendMailUser');?>",
-        type : 'POST',
-        data : {
-          email : email
-        },
-         success : function(data)
-        {
-          alert(data);
-        }
-     })
+    var email = $('#email').val();
+     window.location="<?php echo base_url().'operator/get_member_byemail?email='?>"+email+"";
     }
   }
+ 
+//  function lupa()
+//   {
+//     var email= $('#email').val();
+//     if (email=="")
+//     {
+//       alert('Email harus di isi');
+//     }
+//     else
+//     {
+//       $.ajax({
+//         url  :"<?php echo base_url('email/sendMailUser');?>",
+//         type : 'POST',
+//         data : {
+//           email : email
+//         },
+//          success : function(data)
+//         {
+//           alert(data);
+//         }
+//      })
+//     }
+//   }
 </script>
 </body>
 </html>

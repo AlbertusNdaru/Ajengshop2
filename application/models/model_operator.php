@@ -134,9 +134,27 @@ class model_operator extends CI_Model{
         return $this->db->get('karyawan');
     }
     
-    function get_one($id)
+    function get_one_user($email)
     {
-        $param  =   array('id_karyawan'=>$id);
-        return $this->db->get_where('karyawan',$param);
+       
+        return $this->db->Query("SELECT * from member where email='".$email."'")->row();
+    }
+    function get_one_user_byid($id)
+    {
+       
+        return $this->db->Query("SELECT * from member where id_member='".$id."'")->row();
+    }
+
+    function cekjawabanuser($email,$pertanyaan,$jawaban)
+    {
+        $param  =   array('email'=>$email,
+                          'pertanyaan'=>$pertanyaan,
+                          'jawaban'=>$jawaban);
+        return $this->db->get_where('member',$param);
+    }
+    
+    function resetpassworduser($email,$password)
+    {
+        return $this->db->query("UPDATE member set password='".$password."' where email = '".$email."'");
     }
 }
