@@ -31,9 +31,21 @@ class model_barang extends ci_model{
         return $this->db->query($query);
     }
 
+    function tampilkan_data_detail($id)
+    {
+        $query= "SELECT a.*, b.jenis_barang , c.name FROM Barang as a inner join kategori as b on b.id_kategori = a.id_kategori  inner join imageproduct as c on a.id_barang = c.id_barang where a.id_barang='".$id."' ";
+        return $this->db->query($query);
+    }
+
     function tampilkan_data_paging($config, $halaman)
     {
         $query= "SELECT distinct(a.id_barang)as id, a.*, b.jenis_barang , c.name FROM Barang as a inner join kategori as b on b.id_kategori = a.id_kategori  inner join imageproduct as c on a.id_barang = c.id_barang limit ".($halaman * $config['per_page']).", ".$config['per_page']." ";
+        return $this->db->query($query);
+    }
+
+    function tampilkan_data_paging_home($config, $halaman)
+    {
+        $query= "SELECT distinct(a.id_barang)as id, a.*, b.jenis_barang  FROM Barang as a inner join kategori as b on b.id_kategori = a.id_kategori  limit ".($halaman * $config['per_page']).", ".$config['per_page']." ";
         return $this->db->query($query);
     }
 

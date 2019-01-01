@@ -135,7 +135,7 @@
 
 
 								<div class="block2-txt p-t-20" align="center">
-									<a  href="#" class="block2-name dis-block s-text3 p-b-5">
+									<a  href="<?php echo base_url().'penjualan/productdetail?id='.$data->id_barang?>" class="block2-name dis-block s-text3 p-b-5">
 										<?php echo $data->nama_barang?>
 									</a>
 									<div class="flex-w bo5 of-hidden w-size17" style="width: 155px;">

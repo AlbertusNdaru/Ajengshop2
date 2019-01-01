@@ -22,7 +22,7 @@ class penjualan extends CI_Controller{
             $data['paging']     =$this->pagination->create_links();
             $halaman            =  $this->uri->segment(3);
             $halaman            =$halaman==''?0:$halaman-1;
-            $data['databarang']     =    $this->model_barang->tampilkan_data_paging($config,$halaman);
+            $data['databarang']     =    $this->model_barang->tampilkan_data_paging_home($config,$halaman);
             $data['bestseller']     =    $this->model_barang->tampil_data_bestseller();
             $data['sale']     =    $this->model_barang->tampil_data_sale();
             $data['new']     =    $this->model_barang->tampil_data_new();
@@ -45,8 +45,13 @@ class penjualan extends CI_Controller{
         $data['record']=      $this->model_barang->tampil_data();
         $data['kategori']     =    $this->model_kategori->tampilkan_data();
         $this->template->load('template1','user/product',$data);
-      
-    
+    }
+
+    function productdetail()
+    {
+        $id=$this->input->get('id');
+        $data['record'] = $this->model_barang->tampilkan_data_detail($id)->result();
+        $this->template->load('template1','user/product_detail',$data);
     }
 
 
