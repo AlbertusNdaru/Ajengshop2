@@ -62,7 +62,7 @@ class email extends CI_Controller{
         $this->email->to($email);
       
         $this->email->subject('Forget Password');
-        $this->email->message("Link reset password for User Ajeng Shop.\r\n".base_url()."operator/get_member_byemail_fromemail?id=".$id);
+        $this->email->message("Link reset password for User Ajeng Shop. <br><br>".base_url()."operator/get_member_byemail_fromemail?id=".$id."<br><br> Regard, <br> Admin Ajeng Shop");
         if (!$this->email->send()) {
             // Raise error message
             show_error($this->email->print_debugger());

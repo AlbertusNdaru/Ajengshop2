@@ -786,4 +786,6 @@ function cekoutpending(total)
 		}
 total();
 get_city();
+
+
 </script>

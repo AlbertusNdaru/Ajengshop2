@@ -48,7 +48,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Upload Foto</label>
-                                    <input id="inputfoto" accept="image/x-png,image/gif,image/jpeg" type="file" class="form-control" name="berkas" placeholder="upload">
+                                    <input id="inputfoto" multiple='multiple' accept="image/x-png,image/gif,image/jpeg" type="file" class="form-control" name="berkas[]" placeholder="upload">
                                 </div>
                                 <div class="form-group">
                                     <label>Status</label>

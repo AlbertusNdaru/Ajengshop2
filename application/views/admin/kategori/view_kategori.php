@@ -35,8 +35,8 @@
                                              
                                                 <td><?php echo $r->jenis_barang?></td>
                                                 <td class="center">
-                                                   <?php echo anchor('kategori/edit/'.$r->id_kategori,'Edit','class="btn btn-default"'); ?>
-                                                   <?php echo anchor('kategori/delete/'.$r->id_kategori,'Delete','class="btn btn-default"'); ?>
+                                                   <?php echo anchor('kategori/edit/'.$r->id_kategori,'Edit','class="btn btn-primary"'); ?>
+                                                   <?php echo anchor('kategori/delete/'.$r->id_kategori,'Delete','class="btn btn-danger"'); ?>
                                                 </td>
                                             </tr>
                                         <?php  } ?>

@@ -37,9 +37,15 @@ class model_barang extends ci_model{
         return $this->db->query($query);
     }
 
+    function tampilkan_image_detail($id)
+    {
+        $query= "SELECT * FROM imageproduct where id_barang='".$id."' ";
+        return $this->db->query($query);
+    }
+
     function tampilkan_data_paging($config, $halaman)
     {
-        $query= "SELECT distinct(a.id_barang)as id, a.*, b.jenis_barang , c.name FROM Barang as a inner join kategori as b on b.id_kategori = a.id_kategori  inner join imageproduct as c on a.id_barang = c.id_barang limit ".($halaman * $config['per_page']).", ".$config['per_page']." ";
+        $query= "SELECT distinct(a.id_barang)as id, a.*, b.jenis_barang FROM Barang as a inner join kategori as b on b.id_kategori = a.id_kategori limit ".($halaman * $config['per_page']).", ".$config['per_page']." ";
         return $this->db->query($query);
     }
 
@@ -150,9 +156,22 @@ class model_barang extends ci_model{
     function delete($id)
     {   $query= "SELECT*FROM Barang where id_barang='".$id."'";
         $data=$this->db->query($query)->row();
-        unlink('assets/img_product/'.$data->foto);
         $this->db->where('id_barang',$id);
         $this->db->delete('barang');
+        $this->deleteimg($id);
+    }
+
+    function deteleimg($id)
+    {
+       
+        $detail= "SELECT*FROM imageproduct where id_barang='".$id."'";
+        $img=$this->db->query($detail)->result();
+        foreach($img as $r)
+        {
+            unlink('assets/img_product/'.$r->name);
+        }
+        $this->db->where('id_barang',$id);
+        $this->db->delete('imageproduct');
     }
 
     function tambah_stok($id,$jml)

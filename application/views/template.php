@@ -16,6 +16,7 @@
   <link rel="stylesheet" href="<?php echo base_url('').'assets/'?>bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="<?php echo base_url('').'assets/'?>dist/css/AdminLTE.min.css">
+  <link rel="stylesheet" href="<?php echo base_url('').'assets/'?>dist/css/animate.css">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="<?php echo base_url('').'assets/'?>dist/css/skins/_all-skins.min.css">
@@ -35,6 +36,7 @@
 <script src="<?php echo base_url('').'assets/'?>dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="<?php echo base_url('').'assets/'?>dist/js/demo.js"></script>
+<script src="<?php echo base_url('').'assets/'?>dist/js/bootstrap-notify.js"></script>
 <!-- page script -->
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -436,6 +438,11 @@
 </html>
 
 <script>
+ <?php if(!empty($error)){ ?> 
+ setnotif('<?php echo $error?>'); 
+ <?php }?>
+
+  
   function validate(evt) {
   var theEvent = evt || window.event;
 
@@ -453,4 +460,55 @@
     if(theEvent.preventDefault) theEvent.preventDefault();
   }
 }
+function setnotif(err)
+{ 
+
+
+  $.notify({
+	// options
+	icon: 'glyphicon glyphicon-warning-sign',
+	title: 'Error',
+	message: err,
+  },{
+    // settings
+    element: 'body',
+    position: null,
+    type: "danger",
+    allow_dismiss: true,
+    newest_on_top: false,
+    showProgressbar: false,
+    placement: {
+      from: "bottom",
+      align: "right"
+    },
+    offset: 20,
+    spacing: 10,
+    z_index: 1031,
+    delay: 5000,
+    timer: 1000,
+    url_target: '_blank',
+    mouse_over: null,
+    animate: {
+      enter: 'animated fadeInRight',
+      exit: 'animated fadeOutRight'
+    },
+    onShow: null,
+    onShown: null,
+    onClose: null,
+    onClosed: null,
+    icon_type: 'class',
+    template: '<div data-notify="container" class="col-xs-11 col-sm-3 alert alert-{0}" role="alert">' +
+      '<button type="button" aria-hidden="true" class="close" data-notify="dismiss">×</button>' +
+      '<span data-notify="icon"></span> ' +
+      '<span data-notify="title">{1}</span> ' +
+      '<span data-notify="message">{2}</span>' +
+      '<div class="progress" data-notify="progressbar">' +
+        '<div class="progress-bar progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>' +
+      '</div>' +
+      '<a href="{3}" target="{4}" data-notify="url"></a>' +
+    '</div>' 
+  });
+
+}
+
 </script>

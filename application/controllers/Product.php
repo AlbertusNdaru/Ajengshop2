@@ -26,7 +26,14 @@ class Product extends CI_Controller {
         
 
     }
-	
+
+    function previewImage()
+    {
+        $id=$this->input->post('id');
+        $image= $this->model_barang->tampilkan_image_detail($id)->result();
+        echo json_encode($image);
+    }
+
 
 	public function userindex()
 	{
@@ -74,9 +81,10 @@ class Product extends CI_Controller {
             $merk       =   $this->input->post('merk');
             $status     =   $this->input->post('status');
             $stok       =   $this->input->post('stok');
-            $foto       =   'BRG_'.get_current_date().$_FILES['berkas']['name'];
-            if ($_FILES['berkas']['name']!="")
+            $foto       =   'BRG_'.get_current_date().$_FILES['berkas']['name'][0];
+            if ($_FILES['berkas']['name'][0]!="")
             {
+                $this->model_barang->deteleimg($id);
                 $data       = array('nama_barang'=>$nama,
                 'id_kategori'=>$kategori,
                 'harga'=>$harga,
@@ -84,6 +92,8 @@ class Product extends CI_Controller {
                 'status'=>$status,
                 'stok'=>$stok,
                 'foto'=>$foto);
+                $this->aksi_upload($id,$_FILES['berkas']);
+
             }
             else
             {
@@ -94,7 +104,7 @@ class Product extends CI_Controller {
                 'stok'=>$stok,
                 'status'=>$status);
             }
-          
+    
             $this->model_barang->edit($data,$id);
             redirect('product');
         }

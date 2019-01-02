@@ -26,12 +26,22 @@ class kategori extends CI_Controller{
     {  if (ceksession()){
         if(isset($_POST['submit'])){
             // proses kategori
-            $this->model_kategori->post();
-            redirect('kategori');
+            if ($this->model_kategori->validate($this->input->post('kategori')))
+            {
+                $this->model_kategori->post();
+                redirect('kategori');
+            }
+            else
+            {
+                $data['error'] = 'Nama Kategori Sudah Ada!'; 
+                $this->template->load('template','admin/kategori/input_kategori',$data);
+            }
+            
         }
         else{
             //$this->load->view('kategori/form_input');
-            $this->template->load('template','admin/kategori/input_kategori');
+            $data['error']="";
+            $this->template->load('template','admin/kategori/input_kategori',$data);
         }
         }
     }
