@@ -158,7 +158,7 @@ class model_barang extends ci_model{
         $data=$this->db->query($query)->row();
         $this->db->where('id_barang',$id);
         $this->db->delete('barang');
-        $this->deleteimg($id);
+        
     }
 
     function deteleimg($id)
