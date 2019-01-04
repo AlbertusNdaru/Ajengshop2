@@ -16,6 +16,7 @@ function ceksession()
 
 
 
+
 function isLoginSessionExpired() {
     $CI= & get_instance();
 	$login_session_duration = 300; 
@@ -43,7 +44,7 @@ function ceklastlogin($email=null)
     if($lastlogin){
         if (abs(time()-($lastlogin->lastlogin))>$login_session_duration)
         {
-        $CI->db->query("update user set isLogin='N', gagallogin=0 where email='".$email."'"); 
+        $CI->db->query("update user set isLogin='N' where email='".$email."'"); 
         return true;
         }
     }
@@ -62,7 +63,7 @@ function ceklastloginuser($email=null)
     {
         if (abs(time()-($lastlogin->lastlogin))>$login_session_duration)
         {
-          $CI->db->query("update member set isLogin='N', gagallogin=0 where email='".$email."'"); 
+          $CI->db->query("update member set isLogin='N' where email='".$email."'"); 
           return true;
         }
     }

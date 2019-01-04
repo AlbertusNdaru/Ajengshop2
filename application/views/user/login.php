@@ -27,7 +27,7 @@
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
-<body class="hold-transition login-page">
+<body class="hold-transition login-page" style="overflow-y: hidden;">
 <div class="login-box">
   <div class="login-logo">
     <a href="../../index2.html"><b>Member Ajeng Shop</b></a>
@@ -100,11 +100,10 @@
 
         $.ajax({
         url  :"<?php echo base_url('authuser/login');?>",
-        type : 'POST',
+        type : 'POST', 
         data : {
           email : email, 
-          password : password,
-          submit  : "isi"
+          password : password
         },
          success : function(data)
         {

@@ -27,13 +27,13 @@
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
-<body class="hold-transition register-page">
+<body class="hold-transition register-page" style="overflow-y: hidden; hidden;margin-top: -95px;">
 <div class="register-box">
   <div class="register-logo">
     <a><b>Super Admin Ajeng Shop</b></a>
   </div>
 
-  <div class="register-box-body">
+  <div class="register-box-body"  >
     <p class="login-box-msg">Register a new Admin</p>
 
 
@@ -70,29 +70,16 @@
                 </select>
       </div>
       <div class="row">
-        <div class="col-xs-8">
-          <div class="checkbox icheck">
-            <label>
-              <input type="checkbox"> I agree to the <a href="#">terms</a>
-            </label>
-          </div>
-        </div>
         <!-- /.col -->
-        <div class="col-xs-4">
+        <div class="col-md-12">
           <button onclick="daftar()" class="btn btn-primary btn-block btn-flat">Register</button>
         </div>
         <!-- /.col -->
       </div>
 
-    <div class="social-auth-links text-center">
-      <p>- OR -</p>
-      <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> Sign up using
-        Facebook</a>
-      <a href="#" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-google-plus"></i> Sign up using
-        Google+</a>
+      <div class="col" style="text-align: center;">
+    <a href="<?php echo base_url().'loginadmin'?>"  class="text-center">I already have a membership</a>
     </div>
-
-    <a href="login.html" class="text-center">I already have a membership</a>
   </div>
   <!-- /.form-box -->
 </div>

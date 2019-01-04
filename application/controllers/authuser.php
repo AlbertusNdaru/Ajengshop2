@@ -73,12 +73,10 @@ class authuser extends CI_Controller{
     
     function logout()
     {
-        
-                
+
                 $this->db->query("update member set isLogin='N', gagallogin=0 where id_member='".$_SESSION['userdata']->id_member."'") ;
                 $this->session->sess_destroy();
                 redirect('penjualan');
-          
     }
 
    function cekemail()

@@ -87,11 +87,19 @@ class auth extends CI_Controller{
     
     function logout()
     {
-        
-                
+  
+            if(isset($_SESSION['userdata']->id_user))
+            {
                 $this->db->query("update user set isLogin='N', gagallogin=0 where id_user='".$_SESSION['userdata']->id_user."'") ;
                 $this->session->sess_destroy();
-                $this->load->view('admin/login');
+                redirect('loginadmin');
+            }
+            else
+            {
+                redirect('loginadmin');
+            }
+
+        
           
     }
 

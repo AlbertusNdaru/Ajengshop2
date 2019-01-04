@@ -82,6 +82,14 @@ class operator extends ci_controller{
         //echo json_encode($data['member']);
         $this->load->view('user/lupapassword',$data);
     }
+    function get_user_byemail()
+    {
+        $email= $this->input->get('email');
+        $data['member']= $this->model_operator->get_one_user_admin($email);
+        //echo json_encode($data['member']);
+        $this->load->view('admin/lupapassword',$data);
+    }
+
 
     function get_member_byemail_fromemail()
     {
@@ -97,7 +105,24 @@ class operator extends ci_controller{
         $email= $this->input->post('email');
         $pertanyaan= $this->input->post('pertanyaan');
         $jawaban= $this->input->post('jawaban');
-        $data= $this->model_operator->get_one_user($email,$pertanyaan,$jawaban);
+        $data= $this->model_operator->cekjawabanuser($email,$pertanyaan,$jawaban);
+        if ($data)
+        {
+            echo 1;
+        }
+        else
+        {
+            echo 0;
+        }
+    }
+
+    
+    function cekJawabanadmin()
+    {
+        $email= $this->input->post('email');
+        $pertanyaan= $this->input->post('pertanyaan');
+        $jawaban= $this->input->post('jawaban');
+        $data= $this->model_operator->cekjawabanuseradmin($email,$pertanyaan,$jawaban);
         if ($data)
         {
             echo 1;

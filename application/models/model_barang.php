@@ -154,15 +154,15 @@ class model_barang extends ci_model{
     
     
     function delete($id)
-    {   $query= "SELECT*FROM Barang where id_barang='".$id."'";
-        $data=$this->db->query($query)->row();
+    {   
+        $query= "SELECT*FROM Barang where id_barang='".$id."'";
+        $data=$this->db->query($query)->row(); 
         $this->db->where('id_barang',$id);
         $this->db->delete('barang');
-        
     }
 
-    function deteleimg($id)
-    {
+    function deleteimg($id)
+    {   
        
         $detail= "SELECT*FROM imageproduct where id_barang='".$id."'";
         $img=$this->db->query($detail)->result();

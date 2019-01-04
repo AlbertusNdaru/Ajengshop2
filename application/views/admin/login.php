@@ -27,7 +27,7 @@
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
-<body class="hold-transition login-page">
+<body class="hold-transition login-page" style="overflow-y: hidden;">
 <div class="login-box">
   <div class="login-logo">
     <a href="../../index2.html"><b>Admin Ajeng Shop</b></a>
@@ -85,6 +85,13 @@
 <!-- iCheck -->
 <script src="<?php echo base_url('').'assets/'?>plugins/iCheck/icheck.min.js"></script>
 <script>
+$("#password").keydown(function(e)
+{
+  var keycode = (e.keyCode ? e.keyCode : e.which);
+  if (keycode == '13'){
+    login();    
+  }
+})
   $(function () {
     $('input').iCheck({
       checkboxClass: 'icheckbox_square-blue',
@@ -95,8 +102,16 @@
 
   function lupa()
   {
-     var email = $('#email').val();
-     window.location="<?php echo base_url().'operator/get_member_byemail?email='?>"+email+""
+    var email= $('#email').val();
+    if (email=="")
+    {
+      alert('Email harus di isi');
+    }
+     else
+     {
+      window.location="<?php echo base_url().'operator/get_user_byemail?email='?>"+email+""
+     }
+     
   }
 
   function login()

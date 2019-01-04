@@ -139,6 +139,13 @@ class model_operator extends CI_Model{
        
         return $this->db->Query("SELECT * from member where email='".$email."'")->row();
     }
+
+    function get_one_user_admin($email)
+    {
+       
+        return $this->db->Query("SELECT * from user where email='".$email."'")->row();
+    }
+    
     function get_one_user_byid($id)
     {
        
@@ -152,6 +159,15 @@ class model_operator extends CI_Model{
                           'jawaban'=>$jawaban);
         return $this->db->get_where('member',$param);
     }
+
+    function cekjawabanuseradmin($email,$pertanyaan,$jawaban)
+    {
+        $param  =   array('email'=>$email,
+                          'pertanyaannya'=>$pertanyaan,
+                          'jawabannya'=>$jawaban);
+        return $this->db->get_where('user',$param);
+    }
+    
     
     function resetpassworduser($email,$password)
     {
