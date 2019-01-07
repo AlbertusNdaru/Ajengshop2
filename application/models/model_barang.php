@@ -36,6 +36,11 @@ class model_barang extends ci_model{
         $query= "SELECT a.*, b.jenis_barang , c.name FROM Barang as a inner join kategori as b on b.id_kategori = a.id_kategori  inner join imageproduct as c on a.id_barang = c.id_barang where a.id_barang='".$id."' ";
         return $this->db->query($query);
     }
+    function tampil_data_byIdkategori($id)
+    {
+        $query= "SELECT * FROM barang where id_kategori = '".$id."'";
+        return $this->db->query($query);
+    }
 
     function tampilkan_image_detail($id)
     {

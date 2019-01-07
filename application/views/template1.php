@@ -508,29 +508,7 @@ pending();
 			
               
 		}
-// function getstok(id)
-// {
-// 	$.ajax({
-//                 url  :"<?php echo base_url('penjualan/stokbarang');?>",
-//                 type : 'POST',
-//                 data : {
-//                     id_barang : id
-//                 },
-//                 success : function(data)
-//                 {  // console.log(data);
-// 				    if (data<=0)
-// 					{
-// 						$('#addto'+id+'').attr('hidden');
-// 					}
-// 					else
-// 					{
-// 						$('#addto'+id+'').removeAttr('hidden');	
-// 					}
-// 					 $('#stok'+id+'s').html('Stok Saat ini : '+data+'');
-// 					 $('#stok'+id+'j').val(data);
-//                 }
-//             });	
-// }
+
 function pending()
 {
 	$.ajax({
@@ -608,16 +586,8 @@ function cart()
 							'</div>'+
 
 							'<div class="header-cart-buttons">'+
-								'<div class="header-cart-wrapbtn">'+
-
-									'<a href="cart.html" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">'+
-										'View Cart'+
-									'</a>'+
-								'</div>'+
-
-								'<div class="header-cart-wrapbtn">'+
-
-									'<button onclick="cek()" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">'+
+								'<div class="header-cart-wrapbtn" style="width: 100%;">'+
+								'<button onclick="cek()" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4" >'+
 										'Check Out'+
 									'</button>'+
 								'</div>'+
@@ -743,11 +713,8 @@ function totalcartpending(data)
 							'</div>'+
 
 							'<div class="header-cart-buttons">'+
-								
-
-								'<div class="header-cart-wrapbtn">'+
-
-									'<button onclick="cekoutpending('+total+')" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4" style="position:absolute;">'+
+								'<div class="header-cart-wrapbtn" style="width: 100%;">'+
+									'<button onclick="cekoutpending('+total+')" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">'+
 										'Check Out'+
 									'</button>'+
 								'</div>'+

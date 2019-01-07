@@ -47,6 +47,14 @@ class penjualan extends CI_Controller{
         $this->template->load('template1','user/product',$data);
     }
 
+    function penjualanbykategori(){
+
+        $id = $this->input->get('id');
+        $data['record']=      $this->model_barang->tampil_data_byIdkategori($id);
+        $data['kategori']     =    $this->model_kategori->tampilkan_data();
+        $this->template->load('template1','user/product',$data);
+    }
+
     function productdetail()
     {
         $id=$this->input->get('id');
