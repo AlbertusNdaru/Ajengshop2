@@ -56,7 +56,12 @@
             <!-- /.box-body -->
           </div>
           <!-- /.box -->
-
+          <div align="center">
+						<?php
+						echo $this->pagination->create_links();
+						
+						?>
+					</div>
           
       </div>
       <!-- /.row -->

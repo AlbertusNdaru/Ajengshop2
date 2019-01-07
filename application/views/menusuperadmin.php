@@ -21,7 +21,7 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
-        <li class="active treeview">
+        <li class="treeview">
           <a href="#">
             <i class="fa fa-dashboard"></i> <span>Product</span>
             <span class="pull-right-container">
@@ -32,7 +32,18 @@
             <li ><a href="<?php echo base_url()?>product"><i class="fa fa-circle-o"></i> Form Product</a></li>
             <li><a href="<?php echo base_url()?>kategori"><i class="fa fa-circle-o"></i> Form Kategori</a></li>
             <li><a href="<?php echo base_url()?>product/post"><i class="fa fa-circle-o"></i> Input Product</a></li>
-            <li><a href="<?php echo base_url()?>kategori/post"><i class="fa fa-circle-o"></i> Input Kategori</a></li>
+
+          </ul>
+        </li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-dashboard"></i> <span>Transaksi</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="<?php echo base_url()?>transaksi"><i class="fa fa-circle-o"></i>View Transaksi</a></li>  
           </ul>
         </li>
         <li class="treeview">
@@ -44,7 +55,7 @@
           </a>
           <ul class="treeview-menu">
             <li ><a href="<?php echo base_url()?>operator/post"><i class="fa fa-circle-o"></i>Register Admin</a></li>
-       
           </ul>
         </li>
+    </ul>
         

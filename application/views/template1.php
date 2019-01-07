@@ -743,16 +743,11 @@ function totalcartpending(data)
 							'</div>'+
 
 							'<div class="header-cart-buttons">'+
-								'<div class="header-cart-wrapbtn">'+
-
-									'<a href="cart.html" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">'+
-										'View Cart'+
-									'</a>'+
-								'</div>'+
+								
 
 								'<div class="header-cart-wrapbtn">'+
 
-									'<button onclick="cekoutpending('+total+')" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">'+
+									'<button onclick="cekoutpending('+total+')" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4" style="position:absolute;">'+
 										'Check Out'+
 									'</button>'+
 								'</div>'+

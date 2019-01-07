@@ -149,7 +149,7 @@
 									<button disabled id="right<?php echo $data->id_barang?>" class="btn-num-product-up color1 flex-c-m size7 bg8 eff2">
 										<i class="fs-12 fa fa-plus" aria-hidden="true"></i>
 									</button>
-								</div>
+									</div>
 									<span class="block2-price m-text6 p-r-5">
 										Rp <?php echo number_format($data->harga,2)?>
 									</span>
@@ -162,7 +162,12 @@
 
 					<!-- Pagination -->
 					<div class="pagination flex-m flex-w p-t-26">
-		
+					<div align="center">
+						<?php
+						echo $this->pagination->create_links();
+						
+						?>
+					</div>
 					</div>
 				</div>
 			</div>

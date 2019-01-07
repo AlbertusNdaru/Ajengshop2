@@ -138,7 +138,7 @@
 
 				<!-- Tab panes -->
 				<div class="tab-content p-t-35">
-					<div class="tab-pane fade show active" id="new" role="tabpanel">
+					<div class="tab-pane fade show" id="new" role="tabpanel">
 						<div class="row">
                         <?php $no=1; foreach ($new->result() as $data) { ?>
 							<div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
@@ -163,7 +163,7 @@
 									</div>
 
 									<div class="block2-txt p-t-20" align="center">
-									<a  href="#" class="block2-name dis-block s-text3 p-b-5">
+									<a  href="<?php echo base_url().'penjualan/productdetail?id='.$data->id_barang?>" class="block2-name dis-block s-text3 p-b-5">
 										<?php echo $data->nama_barang?>
 									</a>
 									<div class="flex-w bo5 of-hidden w-size17" style="width: 155px;">
@@ -214,7 +214,7 @@
 									</div>
 
 									<div class="block2-txt p-t-20" align="center">
-									<a  href="#" class="block2-name dis-block s-text3 p-b-5">
+									<a  href="<?php echo base_url().'penjualan/productdetail?id='.$data->id_barang?>" class="block2-name dis-block s-text3 p-b-5">
 										<?php echo $data->nama_barang?>
 									</a>
 									<div class="flex-w bo5 of-hidden w-size17" style="width: 155px;">
@@ -240,7 +240,7 @@
 						</div>
 					</div>
 
-					<div class="tab-pane fade show active" id="sale" role="tabpanel">
+					<div class="tab-pane fade show" id="sale" role="tabpanel">
 						<div class="row">
                         <?php $no=1; foreach ($sale->result() as $data) { ?>
 							<div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
@@ -265,9 +265,9 @@
 									</div>
 
 									<div class="block2-txt p-t-20">
-										<a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
-										<?php echo $data->nama_barang ?>
-										</a>
+									<a  href="<?php echo base_url().'penjualan/productdetail?id='.$data->id_barang?>" class="block2-name dis-block s-text3 p-b-5">
+										<?php echo $data->nama_barang?>
+									</a>
 										<input hidden id="stok<?php echo $data->id_barang?>j" value="<?php echo $data->stok?>">
 									<a id="stok<?php echo $data->id_barang?>s" class="block2-name dis-block s-text3 p-b-5">
 										Stok Saat ini : <?php echo $data->stok?>

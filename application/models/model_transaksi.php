@@ -5,7 +5,7 @@ class model_transaksi extends ci_model
     
     function tampiltransaksi()
     {
-        $query= "SELECT*FROM Transaksi";
+        $query= "SELECT distinct(a.tanggal) as tgl, a.*,b.id_member, c.nama_member FROM Transaksi as a inner join detail as b on b.id_transaksi=a.id_transaksi inner join member as c on c.id_member = b.id_member";
         return $this->db->query($query);   
     }
 
@@ -14,6 +14,12 @@ class model_transaksi extends ci_model
         $id_user= $_SESSION['userdata']->id_user;
         $query= "SELECT distinct date(b.tanggal) as tgl, b.id_transaksi, b.total_bayar FROM transaksi as b inner join detail as a on a.id_transaksi=b.id_transaksi where a.id_user='".$id_user."'";
         return $this->db->query($query);   
+    }
+
+    function tampilkan_detail_transaksi_byid($id)
+    {
+        $query= "SELECT a.*, b.nama_barang FROM detail as a inner join barang as b on b.id_barang=a.id_barang where id_transaksi='".$id."'";
+        return $this->db->query($query)->result();   
     }
 
     function tampilkan_data_paging($config, $halaman)
