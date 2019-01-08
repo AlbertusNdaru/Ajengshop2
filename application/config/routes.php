@@ -38,7 +38,7 @@
 |
 */
 
-$route['default_controller'] = "penjualan/penjualan";
+$route['default_controller'] = "penjualan";
 $route['loginadmin']="auth/loginadmin";
 $route['loginuser']="authuser/loginuserr";
 $route['404_override'] = '';
