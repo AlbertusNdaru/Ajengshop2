@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 07, 2019 at 08:19 AM
+-- Generation Time: Jan 08, 2019 at 10:54 AM
 -- Server version: 10.1.36-MariaDB
 -- PHP Version: 5.6.38
 
@@ -36,17 +36,18 @@ CREATE TABLE `barang` (
   `stok` int(11) NOT NULL,
   `harga` int(11) NOT NULL,
   `foto` varchar(500) NOT NULL,
-  `status` varchar(20) NOT NULL DEFAULT 'new'
+  `status` varchar(20) NOT NULL DEFAULT 'new',
+  `deskripsi` varchar(500) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `barang`
 --
 
-INSERT INTO `barang` (`id_barang`, `nama_barang`, `id_kategori`, `merk`, `stok`, `harga`, `foto`, `status`) VALUES
-('BRG001', 'Spongbob Yellow 2', 'KTG001', 'nice', 17, 200000000, 'BRG_20190102_164609logo-tiket-pesawat-png.png', 'bestseller'),
-('BRG002', 'Spongbob Yellow', 'KTG001', 'nice', 9, 200000, 'BRG_20190107_114936logo-tiket-pesawat-png.png', 'bestseller'),
-('BRG003', 'Hijab', 'KTG002', 'nice', 17, 300000, 'BRG_20190107_115654logo-tiket-pesawat-png.png', 'sale');
+INSERT INTO `barang` (`id_barang`, `nama_barang`, `id_kategori`, `merk`, `stok`, `harga`, `foto`, `status`, `deskripsi`) VALUES
+('BRG001', 'Spongbob Yellow 2', 'KTG001', 'nice', 10, 200000000, 'BRG_20190102_164609logo-tiket-pesawat-png.png', 'bestseller', 'Baju yang elegan'),
+('BRG002', 'Spongbob Yellow', 'KTG001', 'nice', 9, 200000, 'BRG_20190107_114936logo-tiket-pesawat-png.png', 'bestseller', ''),
+('BRG003', 'Hijab', 'KTG002', 'nice', 10, 300000, 'BRG_20190107_115654logo-tiket-pesawat-png.png', 'sale', '');
 
 -- --------------------------------------------------------
 
@@ -78,7 +79,9 @@ INSERT INTO `detail` (`id_detail`, `id_transaksi`, `id_barang`, `harga`, `tangga
 ('DTL007', 'TRS005', 'BRG001', 200000000, '2019-01-07 04:52:51', 1, 'MBR001', 1),
 ('DTL008', 'TRS006', 'BRG001', 200000000, '2019-01-07 04:57:55', 1, 'MBR001', 1),
 ('DTL009', 'TRS006', 'BRG002', 200000, '2019-01-07 04:57:55', 6, 'MBR001', 1),
-('DTL010', 'TRS006', 'BRG003', 300000, '2019-01-07 04:57:55', 1, 'MBR001', 1);
+('DTL010', 'TRS006', 'BRG003', 300000, '2019-01-07 04:57:55', 1, 'MBR001', 1),
+('DTL011', 'TRS007', 'BRG001', 200000000, '2019-01-08 04:27:01', 7, 'MBR001', 1),
+('DTL012', 'TRS007', 'BRG003', 300000, '2019-01-08 04:27:14', 7, 'MBR001', 1);
 
 -- --------------------------------------------------------
 
@@ -152,7 +155,7 @@ CREATE TABLE `member` (
 --
 
 INSERT INTO `member` (`id_member`, `no_ktp`, `nama_member`, `email`, `password`, `pertanyaan`, `jawaban`, `isLogin`, `gagallogin`, `ktp`, `lastlogin`) VALUES
-('MBR001', '12131212321313213', 'Ndaru', 'kasurmabur@gmail.com', 'Jarumblack123!', 'a', 'b', 'N', 0, 'beach-exotic-holiday-248797.jp', '1546837075'),
+('MBR001', '12131212321313213', 'Ndaru', 'kasurmabur@gmail.com', 'Jarumblack123!', 'a', 'b', 'N', 0, 'beach-exotic-holiday-248797.jp', '1546921068'),
 ('MBR002', 'Ajeng Wuriprastiwi', 'Ajeng Wuriprastiwi', 'ajeng300@gmail.com', 'Ajengmini123!', 'hallo', 'mini', 'N', 0, 'xxx.jpeg', '1545922850'),
 ('MBR003', '312312312312312', 'Ndaru K', 'albertusndarukrismandoko@gmail.com', 'Ndaru123@', 'apa', 'aja', 'Y', 0, 'murni.png', '1546588767');
 
@@ -180,7 +183,8 @@ INSERT INTO `transaksi` (`id_transaksi`, `tanggal`, `total_bayar`, `Status`, `bu
 ('TRS003', '2019-01-07 11:51:37', 1000000000, 0, NULL),
 ('TRS004', '2019-01-07 11:52:19', 200000, 0, NULL),
 ('TRS005', '2019-01-07 11:52:56', 200600000, 0, NULL),
-('TRS006', '2019-01-07 11:58:00', 201500000, 0, NULL);
+('TRS006', '2019-01-07 11:58:00', 201500000, 0, NULL),
+('TRS007', '2019-01-08 11:28:13', 1402182000, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -206,7 +210,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id_user`, `email`, `Nama`, `password`, `pertanyaannya`, `jawabannya`, `level`, `isLogin`, `gagallogin`, `lastlogin`) VALUES
-('USR001', 'albertusndarukrismandoko@gmail.com', 'Albertus', '2108', 'a', 'b', 1, 'Y', 0, '1546837101'),
+('USR001', 'albertusndarukrismandoko@gmail.com', 'Albertus', '2108', 'a', 'b', 1, 'N', 0, '1546926364'),
 ('USR002', 'ajengwurip@gmail.com', 'Ajeng WP', 'Ajengmini123!', 'hallo', 'mini', 0, 'Y', 0, '1545923118');
 
 --
