@@ -18,7 +18,7 @@ class transaksi extends ci_controller{
         $data['paging']     =$this->pagination->create_links();
         $halaman            =  $this->uri->segment(3);
         $halaman            =$halaman==''?0:$halaman-1;
-        $data['record']     =    $this->model_transaksi->tampiltransaksi($config,$halaman);
+        $data['record']     =    $this->model_transaksi->tampiltransaksipaging($config,$halaman);
         $this->template->load('template','admin/transaksi/view_transaksi',$data);
         }
     }

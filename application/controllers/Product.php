@@ -15,7 +15,7 @@ class Product extends CI_Controller {
             $this->load->library('pagination');
             $config['base_url'] = base_url().'index.php/product/index/';
             $config['total_rows'] = $this->model_barang->tampil_data()->num_rows();
-            $config['per_page'] = 6; 
+            $config['per_page'] =6; 
             $this->pagination->initialize($config); 
             $data['paging']     =$this->pagination->create_links();
             $halaman            =  $this->uri->segment(3);
@@ -82,6 +82,7 @@ class Product extends CI_Controller {
             $merk       =   $this->input->post('merk');
             $status     =   $this->input->post('status');
             $stok       =   $this->input->post('stok');
+            $deskripsi  =   $this->input->post('deskripsi');
             $foto       =   'BRG_'.get_current_date().$_FILES['berkas']['name'][0];
             if ($_FILES['berkas']['name'][0]!="")
             {
@@ -92,6 +93,7 @@ class Product extends CI_Controller {
                 'merk'=>$merk,
                 'status'=>$status,
                 'stok'=>$stok,
+                'deskripsi'=>$deskripsi,
                 'foto'=>$foto);
                 $this->aksi_upload($id,$_FILES['berkas']);
 
@@ -103,6 +105,7 @@ class Product extends CI_Controller {
                 'harga'=>$harga,
                 'merk'=>$merk,
                 'stok'=>$stok,
+                'deskripsi'=>$deskripsi,
                 'status'=>$status);
             }
     

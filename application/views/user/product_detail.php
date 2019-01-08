@@ -25,9 +25,9 @@
                 Rp <?php echo $record[0]->harga?>
 				</span>
 
-				<p class="s-text8 p-t-10">
+				<!-- <p class="s-text8 p-t-10">
 					Nulla eget sem vitae eros pharetra viverra. Nam vitae luctus ligula. Mauris consequat ornare feugiat.
-                </p>
+                </p> -->
 				<!--  -->
 				<div class="p-t-33 p-b-60">
 					<div style="transform: translate(25%); font-style: oblique;" class="flex-m flex-w p-b-10">
@@ -72,11 +72,11 @@
 
 					<div class="dropdown-content dis-none p-t-15 p-b-23">
 						<p class="s-text8">
-							Fusce ornare mi vel risus porttitor dignissim. Nunc eget risus at ipsum blandit ornare vel sed velit. Proin gravida arcu nisl, a dignissim mauris placerat
+						  <?php echo $data->deskripsi;?>
 						</p>
 					</div>
 				</div>
-
+<!-- 
 				<div class="wrap-dropdown-content bo7 p-t-15 p-b-14">
 					<h5 class="js-toggle-dropdown-content flex-sb-m cs-pointer m-text19 color0-hov trans-0-4">
 						Additional information
@@ -103,7 +103,7 @@
 							Fusce ornare mi vel risus porttitor dignissim. Nunc eget risus at ipsum blandit ornare vel sed velit. Proin gravida arcu nisl, a dignissim mauris placerat
 						</p>
 					</div>
-				</div>
+				</div> -->
 			</div>
 		</div>
 	</div>

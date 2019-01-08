@@ -83,7 +83,7 @@ class model_barang extends ci_model{
 		$noUrut++;
 		$char = "BRG";
         $newID = $char. sprintf("%03s",$noUrut);
-        
+        $deskripsi= $this->input->post('deskripsi');
         $id_barang = $newID;
         $nama       =   $this->input->post('nama_barang');
         $kategori   =   $this->input->post('kategori');
@@ -98,6 +98,7 @@ class model_barang extends ci_model{
                             'merk'=> $merk,
                             'stok'=>$stok,
                             'harga'=>$harga,
+                            'deskripsi'=>$deskripsi,
                             'foto'=>'BRG_'.get_current_date().$_FILES['berkas']['name'][0]);
         $this->db->insert('barang',$data);
         return $id_barang;

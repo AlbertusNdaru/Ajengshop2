@@ -57,6 +57,10 @@
                                     <option value='sale'>Sale</option>
                                     </select>
                                 </div>
+                                <div class="form-group">
+                                    <label>Deskripsi</label>
+                                    <input id="deskripsi" class="form-control" name="deskripsi" placeholder="Deskripsi" value="<?php echo $record->deskripsi?>" required>
+                                </div>
                                 <button type="submit" id="btnsimpanbarang" name="submit" class="btn btn-primary btn-sm" >Update</button> | 
                                 <?php echo anchor('barang','Kembali',array('class'=>'btn btn-danger btn-sm'))?>
                            </form>

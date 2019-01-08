@@ -44,6 +44,10 @@
                                     <input required onkeypress='validate(event)' onchange="validateharga()"  id="inputhargajual" class="form-control" name="harga" placeholder="Harga jual" >
                                 </div>
                                 <div class="form-group">
+                                    <label>Deskripsi</label>
+                                    <input required id="deskripsi" class="form-control" name="deskripsi" placeholder="Deskripsi" >
+                                </div>
+                                <div class="form-group">
                                     <label>Upload Foto</label>
                                     <input required multiple="multiple" id="inputfoto" accept="image/x-png,image/gif,image/jpeg" type="file" class="form-control" name="berkas[]" placeholder="upload">
                                 </div>

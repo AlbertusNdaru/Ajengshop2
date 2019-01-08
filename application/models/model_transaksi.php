@@ -8,6 +8,11 @@ class model_transaksi extends ci_model
         $query= "SELECT distinct(a.tanggal) as tgl, a.*,b.id_member, c.nama_member FROM Transaksi as a inner join detail as b on b.id_transaksi=a.id_transaksi inner join member as c on c.id_member = b.id_member";
         return $this->db->query($query);   
     }
+    function tampiltransaksipaging($config, $halaman)
+    {
+        $query= "SELECT distinct(a.tanggal) as tgl, a.*,b.id_member, c.nama_member FROM Transaksi as a inner join detail as b on b.id_transaksi=a.id_transaksi inner join member as c on c.id_member = b.id_member  Limit ".($halaman * $config['per_page']).", ".$config['per_page']." ";
+        return $this->db->query($query);   
+    }
 
     function tampiltransaksibyid()
     {

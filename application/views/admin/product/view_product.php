@@ -28,6 +28,7 @@
                     <th >Harga</th>
                     <th style="text-align:center">Stok</th>
                     <th style="text-align:center">Status Barang</th>
+                    <th style="text-align:center">Deskripsi</th>
                     <th style="text-align:center">Foto</th>
                     <th style="text-align:center">Aksi</th>
                 </tr>
@@ -42,6 +43,7 @@
                             <td>Rp. <?php echo number_format($r->harga,2) ?></td>
                             <td style="text-align:center"><?php echo $r->stok ?></td>
                             <td style="text-align:center"><?php echo $r->status ?></td>
+                            <td><?php echo $r->deskripsi ?></td>
                             <td style="text-align:center">
                               <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-primary" onclick="previewimage('<?php echo $r->id_barang?>')">Preview Image</button></td>
                             <td align="center">
