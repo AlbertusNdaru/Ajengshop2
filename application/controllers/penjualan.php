@@ -62,8 +62,6 @@ class penjualan extends CI_Controller{
         $this->template->load('template1','user/product_detail',$data);
     }
 
-
-
     function penjualan_offline_tampildata(){
         $data['record']=$this->model_barang->tampil_data()->result();
         echo json_encode($data['record']);
