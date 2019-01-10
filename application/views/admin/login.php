@@ -133,7 +133,7 @@ $("#password").keydown(function(e)
             if (data==3){ window.location="<?php echo base_url().'product'?>";}
             if (data==1){ alert('Akun sudah digunakan untuk Login');}
             if (data==2){ alert('Akun diblokir karena kesalahan password lebih dari 3 kali');}
-            if (data==0){ alert('Email atau password salah');}
+            if (data==0){ alert('Email Admin atau password salah');}
         }
      })
      

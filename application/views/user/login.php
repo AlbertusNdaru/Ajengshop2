@@ -55,7 +55,7 @@
         </div>
         <!-- /.col -->
         <div class="col-xs-4">
-          <button  onclick="login()" class="btn btn-primary btn-block btn-flat">Sign In</button>
+          <button  onclick="loginuser()" class="btn btn-primary btn-block btn-flat">Sign In</button>
         </div>
         <!-- /.col -->
       </div>
@@ -93,7 +93,7 @@
     });
   });
 
-  function login()
+  function loginuser()
  {
     var email= $('#email').val();
      var password = $('#password').val();

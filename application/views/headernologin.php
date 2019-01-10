@@ -17,7 +17,7 @@
 
 			<div class="wrap_header">
 				<!-- Logo -->
-				<a href="<?php echo base_url()?>displayproduct" class="logo">
+				<a href="<?php echo base_url()?>penjualan" class="logo">
 					<img src="<?php echo base_url('assets/member/')?>images/icons/Ajeng.png" alt="IMG-LOGO">
 				</a>
 

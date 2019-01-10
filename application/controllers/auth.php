@@ -56,33 +56,6 @@ class auth extends CI_Controller{
   
        
     }
-
-    function loginuser()
-    {
-        if(isset($_POST['submit'])){
-            
-            // proses login disini
-            $email   =   $this->input->post('email');
-            $password   =   $this->input->post('password');
-            $hasil=  $this->model_operator->loginuser($email,$password);
-            if(isset($hasil))
-            {
-                // update last login
-                $this->session->set_userdata('userdata',$hasil);
-                $this->session->set_userdata('level',0);
-                    //echo "sad";
-                    redirect('penjualan');
-            }
-            else{
-                $this->load->view('form_loginuser');
-            }
-        }
-        else{
-            //$this->load->view('form_login2');
-            $this->session->set_userdata('level',0);
-            $this->load->view('form_loginuser');
-        }
-    }
     
     
     function logout()

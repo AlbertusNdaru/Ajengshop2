@@ -29,7 +29,7 @@
 				<a href="<?php echo base_url()?>penjualan" class="logo">
 					<img src="<?php echo base_url('assets/member/')?>images/icons/Ajeng.png" alt="IMG-LOGO">
 				
-				</a>
+	  			</a>
 
 				<!-- Menu -->
 				<div class="wrap_menu">
