@@ -120,6 +120,6 @@ class transaksi extends ci_controller{
     function get_data_transaksi_by_id()
     {
         $datatransaksi['record']=$this->model_transaksi->tampiltransaksibyid();
-        $this->template->load('template','userinterface/riwayatpembelian',$datatransaksi);
+        $this->template->load('template1','user/riwayat_transaksi',$datatransaksi);
     }
 }

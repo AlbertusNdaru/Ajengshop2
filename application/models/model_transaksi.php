@@ -16,8 +16,8 @@ class model_transaksi extends ci_model
 
     function tampiltransaksibyid()
     {
-        $id_user= $_SESSION['userdata']->id_user;
-        $query= "SELECT distinct date(b.tanggal) as tgl, b.id_transaksi, b.total_bayar FROM transaksi as b inner join detail as a on a.id_transaksi=b.id_transaksi where a.id_user='".$id_user."'";
+        $id= $_SESSION['userdata']->id_member;
+        $query= "SELECT distinct date(b.tanggal) as tgl, b.id_transaksi, b.total_bayar FROM transaksi as b inner join detail as a on a.id_transaksi=b.id_transaksi where a.id_member='".$id."'";
         return $this->db->query($query);   
     }
 

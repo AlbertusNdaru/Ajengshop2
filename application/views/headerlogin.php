@@ -44,23 +44,23 @@
 							</li>
 
 							<li>
-								<a href="product.html">Sale</a>
+								<a href="#">Sale</a>
 							</li>
 
 							<li>
-								<a href="cart.html">Features</a>
+								<a href="#">Features</a>
 							</li>
 
 							<li>
-								<a href="blog.html">Blog</a>
+								<a href="#">Blog</a>
 							</li>
 
 							<li>
-								<a href="about.html">About</a>
+								<a href="#">About</a>
 							</li>
 
 							<li>
-								<a href="contact.html">Contact</a>
+								<a href="#">Contact</a>
 							</li>
 						</ul>
 					</nav>
@@ -68,10 +68,14 @@
 
 				<!-- Header Icon -->
 				<div class="header-icons">
-					<a href="#" class="header-wrapicon1 dis-block">
+					<a href="#" class="header-wrapicon1 dis-block dropdown-toggle" data-toggle="dropdown">
 						<img src="<?php echo base_url('assets/member/')?>images/icons/icon-header-01.png" class="header-icon1" alt="ICON">
 						<?php echo $_SESSION['userdata']->nama_member?>
+						
 					</a>
+                        <ul class="dropdown-menu" style="background-color: white;border-radius: 7px;min-width: 100%;">
+                            <li><a style="color:black; margin-left:5px;" href="<?php echo base_url().'transaksi/get_data_transaksi_by_id'?>">Riwayat Transaksi</a></li>                           
+                        </ul>
 
 					<span class="linedivide1"></span>
 
