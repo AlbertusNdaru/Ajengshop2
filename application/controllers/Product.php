@@ -64,7 +64,7 @@ class Product extends CI_Controller {
     function delete()
     {if (ceksession()){
         $id=  $this->uri->segment(3);
-        $this->model_barang->deteleimg($id);
+        $this->model_barang->deleteimg($id);
         $this->model_barang->delete($id);
         redirect('product');
         }
