@@ -89,8 +89,7 @@ class Authuser extends CI_Controller{
     {
        
      
-            // proses login disini
-            $no_ktp = $this->input->post('no_ktp');
+            // proses login disini  
             $nama_member = $_POST['nama'];
             $no_ktp = $_POST['no_ktp'];
             $email=$_POST['email'];
@@ -103,11 +102,11 @@ class Authuser extends CI_Controller{
             //echo json_encode($_FILES['files']);
             if($hasil==0)
             {
-             redirect('authuser/loginuserr');
+             echo 0;
                 
             }
              else{
-                 echo 'Email sudah Terpakai mbokdhe. Coba Ganti email yang baru!';
+                echo 1;
                 
              } 
       

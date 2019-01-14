@@ -111,7 +111,7 @@
    var pertanyaan = $('#pertanyaan').val();
    var jawaban = $('#jawaban').val();
    var regex = /^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/;
-   var regexpassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$^+=!*()@%&]).{8,}$/;
+   var regexpassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[_#$^+=!*()@%&]).{8,}$/;
     if (!regex.test(email))
     {
        alert('Format email salah');

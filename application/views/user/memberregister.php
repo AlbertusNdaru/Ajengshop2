@@ -34,7 +34,7 @@
   </div>
 
   <div class="register-box-body">
-   <?php echo form_open_multipart("authuser/register")?>
+
     <p class="login-box-msg">Register a new Member</p>
       <div class="form-group has-feedback">
         <input required id="nama" type="text" name="nama" class="form-control" placeholder="Full name">
@@ -64,6 +64,7 @@
         <input required id="jawaban" name="jawaban" type="jawaban" class="form-control" placeholder="Jawaban">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
+      <?php echo form_open_multipart("authuser/register")?>
       <div class="form-group has-feedback">
       <label>Upload Foto</label>
          <input required id="inputfoto" accept="image/x-png,image/gif,image/jpeg" type="file" class="form-control" name="berkas" placeholder="upload" >
@@ -76,11 +77,12 @@
             </label>
           </div>
         </div>
+  </form>
         <!-- /.col -->
         <div class="col-xs-4">
-          <button id="save" type="submit" class="btn btn-primary btn-block btn-flat">Register</button>
+          <button id="save" type="submit" onclick="daftarmember()" class="btn btn-primary btn-block btn-flat">Register</button>
         </div>
-        </form>
+    
         <!-- /.col -->
       </div>
       
@@ -146,7 +148,7 @@ function validate()
 }
 
 
- function daftar()
+ function daftarmember()
  {
    var input = document.getElementById('inputfoto');
    console.log(input.files[0]); 
@@ -156,10 +158,17 @@ function validate()
    var password = $('#password').val();
    var pertanyaan = $('#pertanyaan').val();
    var jawaban = $('#jawaban').val();
+   var no_ktp = $('#no_ktp').val();
+
    var regex = /^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/;
+   var regexpassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[_#$^+=!*()@%&]).{8,}$/;
     if (!regex.test(email))
     {
        alert('Format email salah');
+    }
+    else if(!regexpassword.test(password))
+    {
+         alert('Password Harus Terdiri dari minimal 1 Huruf Capital 1 Huruf kecil dengan panjang karakter minimal 8  ');
     }
     else if (password != validatepassword)
     {
@@ -177,7 +186,8 @@ function validate()
           email :email,
           password :password,
           pertanyaan :pertanyaan,
-          jawaban :jawaban
+          jawaban :jawaban,
+          no_ktp : no_ktp
         },
          success : function(dd)
         {
@@ -188,7 +198,7 @@ function validate()
           }
           else
           {
-            window.location= "<?php echo base_url();?>auth/loginadmin";
+            window.location= "<?php echo base_url();?>loginuser";
           }
            
         }
