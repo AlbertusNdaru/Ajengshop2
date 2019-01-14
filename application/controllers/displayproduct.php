@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Displayproduct extends CI_Controller {
 	function __construct() {
 		parent::__construct();
-		$this->load->model('model_barang');
+		$this->load->model('Model_barang');
 	}
 
 	function index()

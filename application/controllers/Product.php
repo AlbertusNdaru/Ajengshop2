@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Product extends CI_Controller {
 	function __construct() {
 		parent::__construct();
-		$this->load->model('model_barang');
+		$this->load->model('Model_barang');
 		isLoginSessionExpired();
 	}
 
@@ -14,13 +14,13 @@ class Product extends CI_Controller {
         {
             $this->load->library('pagination');
             $config['base_url'] = base_url().'index.php/product/index/';
-            $config['total_rows'] = $this->model_barang->tampil_data()->num_rows();
+            $config['total_rows'] = $this->Model_barang->tampil_data()->num_rows();
             $config['per_page'] =6; 
             $this->pagination->initialize($config); 
             $data['paging']     =$this->pagination->create_links();
             $halaman            =  $this->uri->segment(3);
             $halaman            =$halaman==''?0:$halaman-1;
-            $data['record']     =    $this->model_barang->tampilkan_data_paging($config,$halaman);
+            $data['record']     =    $this->Model_barang->tampilkan_data_paging($config,$halaman);
             $this->template->load('template','admin/product/view_product',$data);
         }
         
@@ -30,7 +30,7 @@ class Product extends CI_Controller {
     function previewImage()
     {
         $id=$this->input->post('id');
-        $image= $this->model_barang->tampilkan_image_detail($id)->result();
+        $image= $this->Model_barang->tampilkan_image_detail($id)->result();
         echo json_encode($image);
     }
 
@@ -47,7 +47,7 @@ class Product extends CI_Controller {
     { if (ceksession()){
         if(isset($_POST['submit'])){
             // proses barang
-            $id = $this->model_barang->post();
+            $id = $this->Model_barang->post();
             $this->aksi_upload($id,$_FILES['berkas']);
             redirect('product');
             
@@ -64,8 +64,8 @@ class Product extends CI_Controller {
     function delete()
     {if (ceksession()){
         $id=  $this->uri->segment(3);
-        $this->model_barang->deleteimg($id);
-        $this->model_barang->delete($id);
+        $this->Model_barang->deleteimg($id);
+        $this->Model_barang->delete($id);
         redirect('product');
         }
     }
@@ -83,10 +83,10 @@ class Product extends CI_Controller {
             $status     =   $this->input->post('status');
             $stok       =   $this->input->post('stok');
             $deskripsi  =   $this->input->post('deskripsi');
-            $foto       =   'BRG_'.get_current_date().$_FILES['berkas']['name'][0];
+            $foto       =   'BRG_'.get_current_date().'_'.$_FILES['berkas']['name'][0];
             if ($_FILES['berkas']['name'][0]!="")
             {
-                $this->model_barang->deteleimg($id);
+                $this->Model_barang->deleteimg($id);
                 $data       = array('nama_barang'=>$nama,
                 'id_kategori'=>$kategori,
                 'harga'=>$harga,
@@ -109,14 +109,14 @@ class Product extends CI_Controller {
                 'status'=>$status);
             }
     
-            $this->model_barang->edit($data,$id);
+            $this->Model_barang->edit($data,$id);
             redirect('product');
         }
         else{
             $id=  $this->uri->segment(3);
             $this->load->model('model_kategori');
             $data['kategori']   =  $this->model_kategori->tampilkan_data()->result();
-            $data['record']     =  $this->model_barang->tampil_data_by_id($id);
+            $data['record']     =  $this->Model_barang->tampil_data_by_id($id);
             //$this->load->view('barang/form_edit',$data);
             $this->template->load('template','admin/product/edit_product',$data);
         }
@@ -138,7 +138,7 @@ class Product extends CI_Controller {
 
             //echo $dataimage->name;
                
-                $config['file_name']            = 'BRG_'.get_current_date().$image;
+                $config['file_name']            = 'BRG_'.get_current_date().'_'.$image;
                 //$config['max_size']             = 100;
                 //$config['max_width']            = 1024;
                 //$config['max_height']           = 768;
@@ -150,7 +150,7 @@ class Product extends CI_Controller {
                     echo json_encode($error);
                 }else{
                     $data = array('upload_data' => $this->upload->data());
-                    $this->model_barang->inserttabelproduct($id,'BRG_'.get_current_date().$image);
+                    $this->Model_barang->inserttabelproduct($id,'BRG_'.get_current_date().'_'.$image);
                     //redirect('barang');
                 }
 

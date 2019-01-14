@@ -1,5 +1,5 @@
 <?php
-class model_pembelian extends ci_model
+class Model_pembelian extends ci_model
 {
     
     
@@ -43,9 +43,9 @@ class model_pembelian extends ci_model
 		$char = "PMB";
 		$newID = $char. sprintf("%03s",$noUrut);
 		$querybarang = "SELECT id_barang from detail_pembelian where id_user ='".$id_user."' and id_barang='".$id_brng."' and status=0 and date(tanggal)=date(now())";
-        $cekBarang = $this->db->query($querybarang)->row();
+        $cekbarang = $this->db->query($querybarang)->row();
         $data= array('id_detail_pembelian'=>$newID,'id_barang'=>$id_brng,'harga'=>$harga,'id_supliyer'=>$id_supliyer,'jumlah'=>$jml,'id_user'=>$id_user,'status'=>0);
-		if($cekBarang)
+		if($cekbarang)
 		{
 			$this->db->query("UPDATE detail_pembelian set jumlah=jumlah+$jml where id_user = '".$id_user."' and id_barang='".$id_brng."' and status=0 and date(tanggal)=date(now())");  
 		}

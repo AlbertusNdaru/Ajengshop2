@@ -1,39 +1,39 @@
 <?php
-class model_barang extends ci_model{
+class Model_barang extends ci_model{
     
     
     function tampil_data()
     {
-        $query= "SELECT*FROM Barang";
+        $query= "SELECT*FROM barang";
         return $this->db->query($query);
     }
 
     function tampil_data_bestseller()
     {
-        $query= "SELECT*FROM Barang where status='bestseller'";
+        $query= "SELECT*FROM barang where status='bestseller'";
         return $this->db->query($query);
     }
     function tampil_data_new()
     {
-        $query= "SELECT*FROM Barang where status='new'";
+        $query= "SELECT*FROM barang where status='new'";
         return $this->db->query($query);
     }
     function tampil_data_sale()
     {
-        $query= "SELECT*FROM Barang where status='sale'";
+        $query= "SELECT*FROM barang where status='sale'";
         return $this->db->query($query);
     }
    
 
     function tampil_data_by_stok()
     {
-        $query= "SELECT*FROM Barang where stok<=10";
+        $query= "SELECT*FROM barang where stok<=10";
         return $this->db->query($query);
     }
 
     function tampilkan_data_detail($id)
     {
-        $query= "SELECT a.*, b.jenis_barang , c.name FROM Barang as a inner join kategori as b on b.id_kategori = a.id_kategori  inner join imageproduct as c on a.id_barang = c.id_barang where a.id_barang='".$id."' ";
+        $query= "SELECT a.*, b.jenis_barang , c.name FROM barang as a inner join kategori as b on b.id_kategori = a.id_kategori  inner join imageproduct as c on a.id_barang = c.id_barang where a.id_barang='".$id."' ";
         return $this->db->query($query);
     }
     function tampil_data_byIdkategori($id)
@@ -50,26 +50,26 @@ class model_barang extends ci_model{
 
     function tampilkan_data_paging($config, $halaman)
     {
-        $query= "SELECT distinct(a.id_barang)as id, a.*, b.jenis_barang FROM Barang as a inner join kategori as b on b.id_kategori = a.id_kategori limit ".($halaman * $config['per_page']).", ".$config['per_page']." ";
+        $query= "SELECT distinct(a.id_barang)as id, a.*, b.jenis_barang FROM barang as a inner join kategori as b on b.id_kategori = a.id_kategori limit ".($halaman * $config['per_page']).", ".$config['per_page']." ";
         return $this->db->query($query);
     }
 
     function tampilkan_data_paging_home($config, $halaman)
     {
-        $query= "SELECT distinct(a.id_barang)as id, a.*, b.jenis_barang  FROM Barang as a inner join kategori as b on b.id_kategori = a.id_kategori  limit ".($halaman * $config['per_page']).", ".$config['per_page']." ";
+        $query= "SELECT distinct(a.id_barang)as id, a.*, b.jenis_barang  FROM barang as a inner join kategori as b on b.id_kategori = a.id_kategori  limit ".($halaman * $config['per_page']).", ".$config['per_page']." ";
         return $this->db->query($query);
     }
 
     function tampil_data_by_id($id)
     {
-        $query= "SELECT a.* , b.jenis_barang FROM Barang as a inner join kategori as b  on b.id_kategori=a.id_kategori  where id_barang='".$id."'";
+        $query= "SELECT a.* , b.jenis_barang FROM barang as a inner join kategori as b  on b.id_kategori=a.id_kategori  where id_barang='".$id."'";
         return $this->db->query($query)->row();
     }
 
     function tampil_data_by_name()
     {
         $nama =$this->input->post('nama');
-        $query= "SELECT*FROM Barang where nama_barang like '%".$nama."%'";
+        $query= "SELECT*FROM barang where nama_barang like '%".$nama."%'";
         return $this->db->query($query);
     }
     
@@ -99,7 +99,7 @@ class model_barang extends ci_model{
                             'stok'=>$stok,
                             'harga'=>$harga,
                             'deskripsi'=>$deskripsi,
-                            'foto'=>'BRG_'.get_current_date().$_FILES['berkas']['name'][0]);
+                            'foto'=>'BRG_'.get_current_date().'_'.$_FILES['berkas']['name'][0]);
         $this->db->insert('barang',$data);
         return $id_barang;
     }
@@ -161,7 +161,7 @@ class model_barang extends ci_model{
     
     function delete($id)
     {   
-        $query= "SELECT*FROM Barang where id_barang='".$id."'";
+        $query= "SELECT*FROM barang where id_barang='".$id."'";
         $data=$this->db->query($query)->row(); 
         $this->db->where('id_barang',$id);
         $this->db->delete('barang');
@@ -188,13 +188,13 @@ class model_barang extends ci_model{
 
     function kurang_stok_cartpending($id)
     {
-        $query= "UPDATE Barang set stok=stok-1 where id_barang='".$id."'";
+        $query= "UPDATE barang set stok=stok-1 where id_barang='".$id."'";
         $this->db->query($query);
     }
 
     function tampil_data_stok_byId($id)
     {
-        $query= "SELECT stok FROM Barang where id_barang='".$id."'";
+        $query= "SELECT stok FROM barang where id_barang='".$id."'";
         return $this->db->query($query)->row();
     }
     

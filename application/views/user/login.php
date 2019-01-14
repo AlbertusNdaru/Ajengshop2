@@ -70,7 +70,7 @@
     </div> -->
     <!-- /.social-auth-links -->
 
-    <button class="btn btn-primary" onclick="lupa()">I forgot my password</button><br>
+    <button class="btn btn-primary" onclick="lupa()">I forgot my password</button><br><br>
     <a href="<?php echo base_url()?>operator/postuser" class="text-center">Register a new membership</a>
 
   </div>

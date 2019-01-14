@@ -1,5 +1,5 @@
 <?php
-class model_user extends ci_model
+class Model_user extends ci_model
 {
     function register($datauser)
     {

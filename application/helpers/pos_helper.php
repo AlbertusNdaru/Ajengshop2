@@ -57,7 +57,7 @@ function ceklastlogin($email=null)
 
 function ceklastloginuser($email=null)
 {  $CI= & get_instance();
-    $login_session_duration = 300; 
+    $login_session_duration = 200; 
     $lastlogin = $CI->db->query("SELECT lastlogin from member where email='".$email."'")->row() ;
     if($lastlogin)
     {
@@ -98,7 +98,7 @@ function get_current_date()
 {
     $CI= & get_instance();
     $date= $CI->db->query('Select NOW() as date')->row();
-    return date('Ymd_His', strtotime($date->date));
+    return date('Ymd', strtotime($date->date));
 }
 
 ?>

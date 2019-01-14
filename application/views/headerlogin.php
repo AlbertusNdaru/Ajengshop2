@@ -42,25 +42,11 @@
 							<li>
 								<a href="<?php echo base_url()?>penjualan/penjualan">Shop</a>
 							</li>
-
 							<li>
-								<a href="#">Sale</a>
+								<a href="<?php echo base_url()?>auth/loginadmin">Backend Admin</a>
 							</li>
-
 							<li>
-								<a href="#">Features</a>
-							</li>
-
-							<li>
-								<a href="#">Blog</a>
-							</li>
-
-							<li>
-								<a href="#">About</a>
-							</li>
-
-							<li>
-								<a href="#">Contact</a>
+								<a href="<?php echo base_url()?>auth/loginadmin">Super Admin</a>
 							</li>
 						</ul>
 					</nav>

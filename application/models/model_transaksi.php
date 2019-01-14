@@ -1,5 +1,5 @@
 <?php
-class model_transaksi extends ci_model
+class Model_transaksi extends ci_model
 {
     
     
@@ -122,9 +122,9 @@ class model_transaksi extends ci_model
 		$char = "DTL";
 		$newID = $char. sprintf("%03s",$noUrut);
 		$querybarang = "SELECT id_barang from detail where id_member ='".$id_member."' and id_barang='".$id_brng."' and status=0 and date(tanggal)=date(now())";
-        $cekBarang = $this->db->query($querybarang)->row();
+        $cekbarang = $this->db->query($querybarang)->row();
         $data= array('id_detail'=>$newID,'id_barang'=>$id_brng,'harga'=>$harga,'jumlah'=>$jml,'id_member'=>$id_member,'status'=>0);
-		if($cekBarang)
+		if($cekbarang)
 		{
 			$this->db->query("UPDATE detail set jumlah=$jml where id_member = '".$id_member."' and id_barang='".$id_brng."' and status=0 and date(tanggal)=date(now())");  
 		}

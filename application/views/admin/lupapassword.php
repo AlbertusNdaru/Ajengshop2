@@ -161,7 +161,7 @@ function cekjawaban()
     else
     {
       $.ajax({
-        url  :"<?php echo base_url('operator/resetpassworduser');?>",
+        url  :"<?php echo base_url('operator/resetpasswordadmin');?>",
         type : 'POST',
         data : {
           email : email,
@@ -172,7 +172,7 @@ function cekjawaban()
           if (data==1)
           {
              alert('Password Berhasil diganti');
-             window.location="<?php echo base_url().'loginuser'?>"
+             window.location="<?php echo base_url().'loginadmin'?>"
           }
           else
           {

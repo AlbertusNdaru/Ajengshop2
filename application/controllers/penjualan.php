@@ -1,11 +1,11 @@
 <?php
-class penjualan extends CI_Controller{
+class Penjualan extends CI_Controller{
     
     function __construct() {
         parent::__construct();
-        $this->load->model('model_barang');
-        $this->load->model('model_transaksi');
-        $this->load->model('model_kategori');
+        $this->load->model('Model_barang');
+        $this->load->model('Model_transaksi');
+        $this->load->model('Model_kategori');
 
         isLoginSessionExpireduser();
 
@@ -16,16 +16,16 @@ class penjualan extends CI_Controller{
         
             $this->load->library('pagination');
             $config['base_url'] = base_url().'index.php/penjualan/index/';
-            $config['total_rows'] = $this->model_barang->tampil_data()->num_rows();
+            $config['total_rows'] = $this->Model_barang->tampil_data()->num_rows();
             $config['per_page'] = 5; 
             $this->pagination->initialize($config); 
             $data['paging']     =$this->pagination->create_links();
             $halaman            =  $this->uri->segment(3);
             $halaman            =$halaman==''?0:$halaman-1;
-            $data['databarang']     =    $this->model_barang->tampilkan_data_paging_home($config,$halaman);
-            $data['bestseller']     =    $this->model_barang->tampil_data_bestseller();
-            $data['sale']     =    $this->model_barang->tampil_data_sale();
-            $data['new']     =    $this->model_barang->tampil_data_new();
+            $data['databarang']     =    $this->Model_barang->tampilkan_data_paging_home($config,$halaman);
+            $data['bestseller']     =    $this->Model_barang->tampil_data_bestseller();
+            $data['sale']     =    $this->Model_barang->tampil_data_sale();
+            $data['new']     =    $this->Model_barang->tampil_data_new();
             $this->template->load('template1','user/home2',$data);
       
         
@@ -35,39 +35,39 @@ class penjualan extends CI_Controller{
     function stokbarang()
     {
        $id= $this->input->post('id_barang');
-       $data= $this->model_barang->tampil_data_stok_byId($id);
+       $data= $this->Model_barang->tampil_data_stok_byId($id);
        echo $data->stok;
     }
 
     function penjualan(){
 
      
-        $data['record']=      $this->model_barang->tampil_data();
-        $data['kategori']     =    $this->model_kategori->tampilkan_data();
+        $data['record']=      $this->Model_barang->tampil_data();
+        $data['kategori']     =    $this->Model_kategori->tampilkan_data();
         $this->template->load('template1','user/product',$data);
     }
 
     function penjualanbykategori(){
 
         $id = $this->input->get('id');
-        $data['record']=      $this->model_barang->tampil_data_byIdkategori($id);
-        $data['kategori']     =    $this->model_kategori->tampilkan_data();
+        $data['record']=      $this->Model_barang->tampil_data_byIdkategori($id);
+        $data['kategori']     =    $this->Model_kategori->tampilkan_data();
         $this->template->load('template1','user/product',$data);
     }
 
     function productdetail()
     {
         $id=$this->input->get('id');
-        $data['record'] = $this->model_barang->tampilkan_data_detail($id)->result();
+        $data['record'] = $this->Model_barang->tampilkan_data_detail($id)->result();
         $this->template->load('template1','user/product_detail',$data);
     }
 
     function penjualan_offline_tampildata(){
-        $data['record']=$this->model_barang->tampil_data()->result();
+        $data['record']=$this->Model_barang->tampil_data()->result();
         echo json_encode($data['record']);
     }
     function penjualan_offline_tampildata_byname(){
-        $data['record']=$this->model_barang->tampil_data_by_name()->result();
+        $data['record']=$this->Model_barang->tampil_data_by_name()->result();
         echo json_encode($data['record']);
     }
 
@@ -76,11 +76,11 @@ class penjualan extends CI_Controller{
     {
         $id= $this->input->post('id_barang');
         $jml = $this->input->post('jml');
-                $data= $this->model_barang->tampil_data_by_id($id);
+                $data= $this->Model_barang->tampil_data_by_id($id);
                 $harga= $data->harga;
                 $total= $harga * 1;
                 $datatransaksi = array('id'=>$id,'jml'=>$jml,'hrg'=>$harga,'total'=>$total);
-                $jmlchart = $this->model_transaksi->insertdetail($datatransaksi);
+                $jmlchart = $this->Model_transaksi->insertdetail($datatransaksi);
        
     }
 
@@ -89,44 +89,44 @@ class penjualan extends CI_Controller{
         $id= $this->input->post('id_barang');
         $jml= $this->input->post('jumlah');
        
-                $data= $this->model_barang->tampil_data_by_id($id);
+                $data= $this->Model_barang->tampil_data_by_id($id);
                 $harga= $data->harga_jual;
                 $total= $harga * $jml;
                 $datatransaksi = array('id'=>$id,'jml'=>$jml,'hrg'=>$harga,'total'=>$total);
-                $jmlchart = $this->model_transaksi->insertdetail($datatransaksi);        
+                $jmlchart = $this->Model_transaksi->insertdetail($datatransaksi);        
       
     }
     
 
     function get_totalchart()
     {
-        $jmlchart = $this->model_transaksi->totalchart();
+        $jmlchart = $this->Model_transaksi->totalchart();
         echo $jmlchart;
     }
 
     function get_trans_pending()
     {
-        $jmlchart = $this->model_transaksi->totalchartpending();
+        $jmlchart = $this->Model_transaksi->totalchartpending();
         echo $jmlchart;
     }
 
     function get_data_pending()
     {
-        $datapending = $this->model_transaksi->datapending()->result();
+        $datapending = $this->Model_transaksi->datapending()->result();
         echo json_encode($datapending);
     }
 
     function accpending()
     {
         $id= $_POST['id_transaksi'];
-        $datapending = $this->model_transaksi->accdatapending($id);
+        $datapending = $this->Model_transaksi->accdatapending($id);
     }
 
     function updatedetail()
     {
         $id= $this->input->post('id');
         $jml= $this->input->post('jml');
-        $data = $this->model_transaksi->updatedetail($jml,$id);
+        $data = $this->Model_transaksi->updatedetail($jml,$id);
         //redirect('penjualan/cartdetail');
     }
 
@@ -135,7 +135,7 @@ class penjualan extends CI_Controller{
     {
         if(isset($_SESSION['userdata']))
         {
-        $cart = $this->model_transaksi->cart()->result();
+        $cart = $this->Model_transaksi->cart()->result();
         echo json_encode($cart);
         }
     }
@@ -144,7 +144,7 @@ class penjualan extends CI_Controller{
     {
         if(isset($_SESSION['userdata']))
         {
-        $cart['cartdetail'] = $this->model_transaksi->cart();
+        $cart['cartdetail'] = $this->Model_transaksi->cart();
         $this->template->load('template1','user/cart_detail',$cart);
         }
     }
@@ -153,7 +153,7 @@ class penjualan extends CI_Controller{
      
         $id= $this->input->post('id_barang');
         $jml= $this->input->post('jml');
-        $data= $this->model_barang->tampil_data_by_id($id);
+        $data= $this->Model_barang->tampil_data_by_id($id);
         $harga= $data->harga;
         $foto= $data->foto;
         $namabarang= $data->nama_barang;
@@ -199,12 +199,12 @@ class penjualan extends CI_Controller{
     {
         if($_SESSION['level']==1)
         {
-            $pembelian['databelanja'] = $this->model_transaksi->chartoff()->result();
+            $pembelian['databelanja'] = $this->Model_transaksi->chartoff()->result();
             echo json_encode($pembelian['databelanja']);
         }
         else
         {
-            $pembelian['databelanja'] = $this->model_transaksi->chart()->result();
+            $pembelian['databelanja'] = $this->Model_transaksi->chart()->result();
             echo json_encode($pembelian['databelanja']);
         }
       
@@ -213,33 +213,33 @@ class penjualan extends CI_Controller{
     function hapusdetail()
     {
         $id= $this->input->post('id');
-        $this->model_transaksi->hapusdetail($id);
+        $this->Model_transaksi->hapusdetail($id);
         redirect("penjualan/cartdetail");
     }
     
     function bataltransaksi()
     {
         $id=$this->input->post('id');
-        $this->model_transaksi->bataltransaksi($id);
+        $this->Model_transaksi->bataltransaksi($id);
         
     }
     function hapusdetailadmin()
     {
         $id= $this->input->post('id_detail');
-        $this->model_transaksi->hapusdetail($id);
+        $this->Model_transaksi->hapusdetail($id);
        
     }
     function hapusdetailadminbatal()
     {
         $id= $this->input->post('id_detail');
-        $this->model_transaksi->hapusdetailbatal();
+        $this->Model_transaksi->hapusdetailbatal();
        
     }
 
     function updatepenjualan()
     {
         $totalbayar=$this->input->post('total');
-        $validate = $this->model_transaksi->insertpenjualan($totalbayar);
+        $validate = $this->Model_transaksi->insertpenjualan($totalbayar);
         if(isset($validate))
         {
                 echo json_encode($validate);
@@ -255,7 +255,7 @@ class penjualan extends CI_Controller{
     function updatepenjualanoffline()
     {
         $totalbayar=$this->input->post('total');
-        $this->model_transaksi->insertpenjualanoffline($totalbayar);
+        $this->Model_transaksi->insertpenjualanoffline($totalbayar);
         redirect("penjualan/penjualan_offline");
     }
 

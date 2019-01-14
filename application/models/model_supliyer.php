@@ -1,5 +1,5 @@
 <?php
-class model_supliyer extends CI_Model{
+class Model_supliyer extends CI_Model{
     
     
 

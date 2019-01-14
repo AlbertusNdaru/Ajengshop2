@@ -32,25 +32,11 @@
 							<li>
 								<a href="<?php echo base_url()?>penjualan/penjualan">Shop</a>
 							</li>
-
 							<li>
-								<a href="product.html">Sale</a>
+								<a href="<?php echo base_url()?>auth/loginadmin">Backend</a>
 							</li>
-
 							<li>
-								<a href="cart.html">Features</a>
-							</li>
-
-							<li>
-								<a href="blog.html">Blog</a>
-							</li>
-
-							<li>
-								<a href="about.html">About</a>
-							</li>
-
-							<li>
-								<a href="contact.html">Contact</a>
+								<a href="<?php echo base_url()?>auth/loginadmin">Super Admin</a>
 							</li>
 						</ul>
 					</nav>

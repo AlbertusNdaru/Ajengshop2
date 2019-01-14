@@ -1,11 +1,11 @@
 <?php
-class authuser extends CI_Controller{
+class Authuser extends CI_Controller{
     
     function __construct() {
         parent::__construct();
-        $this->load->model('model_operator');
-        $this->load->model('model_user');
-        $this->load->model('model_transaksi');
+        $this->load->model('Model_operator');
+        $this->load->model('Model_user');
+        $this->load->model('Model_transaksi');
         
         
     }
@@ -33,13 +33,13 @@ class authuser extends CI_Controller{
             $password   =   $this->input->post('password');
             if (ceklastloginuser($email))
             {
-                $hasil=  $this->model_operator->loginuser($email,$password);
+                $hasil=  $this->Model_operator->loginuser($email,$password);
                 if (isset($_SESSION['cart']))
                 {
                     $datatransaksi = $this->session->userdata('cart');
                     foreach($datatransaksi as $data)
                     {
-                        $this->model_transaksi->insertdetailfromnologin($data);
+                        $this->Model_transaksi->insertdetailfromnologin($data);
                     }
                 }
                 if($hasil==0)
@@ -81,7 +81,7 @@ class authuser extends CI_Controller{
 
    function cekemail()
    {
-       echo $this->model_user->cekEmail($_POST['email']);
+       echo $this->Model_user->cekEmail($_POST['email']);
    }
 
 
@@ -98,7 +98,7 @@ class authuser extends CI_Controller{
             $pertanyaan =$_POST['pertanyaan'];
             $jawaban =$_POST['jawaban'];
             $datauser = array('id_member'=>'','nama_member'=>$nama_member,'email'=>$email,'password'=>$password,'pertanyaan'=>$pertanyaan,'no_ktp'=>$no_ktp,'jawaban'=>$jawaban,'ktp'=>$_FILES['berkas']['name']);
-            $hasil=  $this->model_user->registeruser($datauser); 
+            $hasil=  $this->Model_user->registeruser($datauser); 
             $this->aksi_upload();
             //echo json_encode($_FILES['files']);
             if($hasil==0)
@@ -117,7 +117,7 @@ class authuser extends CI_Controller{
     function lupapasswordadmin()
     {
         $id_user=$this->input->post('id_user');
-        $hasil = $this->model_operator->getUser($id_user)->row();
+        $hasil = $this->Model_operator->getUser($id_user)->row();
         echo json_encode($hasil);
     }
 
@@ -126,7 +126,7 @@ class authuser extends CI_Controller{
         $i=$this->input->post('id_user');
         $p=$this->input->post('pertanyaannya');
         $j=$this->input->post('jawabannya');
-        $hasil = $this->model_operator->getUserCek($i,$p,$j)->num_rows();
+        $hasil = $this->Model_operator->getUserCek($i,$p,$j)->num_rows();
         echo $hasil;
 
     }
@@ -136,7 +136,7 @@ class authuser extends CI_Controller{
         $i=$this->input->post('id_user');
         $p=$this->input->post('passbaru');
 
-        $this->model_operator->resetpasswordbaru($i,$p);
+        $this->Model_operator->resetpasswordbaru($i,$p);
         echo 1;
 
     }
@@ -163,14 +163,14 @@ class authuser extends CI_Controller{
 
     function selectidkaryawan()
     {
-        echo json_encode($this->model_user->getKaryawan());
+        echo json_encode($this->Model_user->getKaryawan());
     }
     public function aksi_upload(){
 		$config['upload_path']          = './assets/img_ktp_member/';
 		$config['allowed_types']        = '*';
-		//$config['max_size']             = 100;
-		//$config['max_width']            = 1024;
-		//$config['max_height']           = 768;
+		$config['max_size']             = 1000;
+		$config['max_width']            = 1024;
+		$config['max_height']           = 1500;
  
 		$this->load->library('upload', $config);
  

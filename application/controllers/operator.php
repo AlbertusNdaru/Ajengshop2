@@ -1,10 +1,10 @@
 <?php
-class operator extends ci_controller{
+class Operator extends ci_controller{
     
    function __construct() {
         parent::__construct();
-        $this->load->model('model_operator');
-        $this->load->model('model_user');
+        $this->load->model('Model_operator');
+        $this->load->model('Model_user');
         isLoginSessionExpired();
     }
     
@@ -12,7 +12,7 @@ class operator extends ci_controller{
     {
         if (ceksession()){
        
-        $data['record']=  $this->model_operator->tampildata();
+        $data['record']=  $this->Model_operator->tampildata();
         
         //$this->load->view('operator/lihat_data',$data);
         $this->template->load('template','operator/lihat_data',$data);
@@ -32,12 +32,12 @@ class operator extends ci_controller{
     function edit()
     {
         if(isset($_POST['submit'])){
-            $this->model_operator->edit();
+            $this->Model_operator->edit();
              redirect('operator');
         }
         else{
             $id=  $this->uri->segment(3);
-            $data['record']=  $this->model_operator->get_one($id)->row_array();
+            $data['record']=  $this->Model_operator->get_one($id)->row_array();
             //$this->load->view('operator/form_edit',$data);
             $this->template->load('template','operator/form_edit',$data);
         }
@@ -62,14 +62,14 @@ class operator extends ci_controller{
 
     function tampil_member()
     {
-        $data['record']=  $this->model_operator->tampildatamember();
+        $data['record']=  $this->Model_operator->tampildatamember();
         
         //$this->load->view('operator/lihat_data',$data);
         $this->template->load('template','operator/member',$data);
     }
     function tampil_member_by_name()
     {
-        $data['record']=  $this->model_operator->tampildatamemberbyname()->result();
+        $data['record']=  $this->Model_operator->tampildatamemberbyname()->result();
         echo json_encode($data['record']);
         //$this->load->view('operator/lihat_data',$data);
         //$this->template->load('template','operator/member',$data);
@@ -78,14 +78,14 @@ class operator extends ci_controller{
     function get_member_byemail()
     {
         $email= $this->input->get('email');
-        $data['member']= $this->model_operator->get_one_user($email);
+        $data['member']= $this->Model_operator->get_one_user($email);
         //echo json_encode($data['member']);
         $this->load->view('user/lupapassword',$data);
     }
     function get_user_byemail()
     {
         $email= $this->input->get('email');
-        $data['member']= $this->model_operator->get_one_user_admin($email);
+        $data['member']= $this->Model_operator->get_one_user_admin($email);
         //echo json_encode($data['member']);
         $this->load->view('admin/lupapassword',$data);
     }
@@ -94,7 +94,7 @@ class operator extends ci_controller{
     function get_member_byemail_fromemail()
     {
         $id= $this->input->get('id');
-        $data['member']= $this->model_operator->get_one_user_byid($id);
+        $data['member']= $this->Model_operator->get_one_user_byid($id);
         //echo json_encode($data['member']);
         $this->load->view('user/lupapasswordemail',$data);
     }
@@ -105,7 +105,7 @@ class operator extends ci_controller{
         $email= $this->input->post('email');
         $pertanyaan= $this->input->post('pertanyaan');
         $jawaban= $this->input->post('jawaban');
-        $data= $this->model_operator->cekjawabanuser($email,$pertanyaan,$jawaban);
+        $data= $this->Model_operator->cekjawabanuser($email,$pertanyaan,$jawaban);
         if ($data)
         {
             echo 1;
@@ -122,7 +122,7 @@ class operator extends ci_controller{
         $email= $this->input->post('email');
         $pertanyaan= $this->input->post('pertanyaan');
         $jawaban= $this->input->post('jawaban');
-        $data= $this->model_operator->cekjawabanuseradmin($email,$pertanyaan,$jawaban);
+        $data= $this->Model_operator->cekjawabanuseradmin($email,$pertanyaan,$jawaban);
         if ($data)
         {
             echo 1;
@@ -137,7 +137,22 @@ class operator extends ci_controller{
     {
         $email= $this->input->post('email');
         $password= $this->input->post('password');
-        $data = $this->model_operator->resetpassworduser($email,$password);
+        $data = $this->Model_operator->resetpassworduser($email,$password);
+        if ($data)
+        {
+            echo 1;
+        }
+        else
+        {
+            echo 0;
+        }
+    }
+
+     function resetpasswordadmin()
+    {
+        $email= $this->input->post('email');
+        $password= $this->input->post('password');
+        $data = $this->Model_operator->resetpasswordadmin($email,$password);
         if ($data)
         {
             echo 1;

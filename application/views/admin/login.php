@@ -33,8 +33,13 @@
     <a href="../../index2.html"><b>Admin Ajeng Shop</b></a>
   </div>
   <!-- /.login-logo -->
-  <div class="login-box-body">
-    <p class="login-box-msg">Sign in to start your session</p>
+  <div class="login-box-body"> 
+    <br class="login-box-msg">Admin
+    <br class="login-box-msg"> Username: admin@gmail.com 
+    <br class="login-box-msg"> Password: adminKu123!
+    <br class="login-box-msg">Super Admin
+    <br class="login-box-msg"> Username: admin2@gmail.com 
+    <br class="login-box-msg"> Password: adminKu1234!
 
 
       <div class="form-group has-feedback">
@@ -70,7 +75,7 @@
     </div> -->
     <!-- /.social-auth-links -->
 
-    <button class="btn btn-primary" onclick="lupa()">I forgot my password</button><br>
+    <button class="btn btn-primary" onclick="lupa()">I forgot my password</button><br><br>
     <a href="<?php echo base_url()?>operator/post" class="text-center">Register a new membership</a>
 
   </div>

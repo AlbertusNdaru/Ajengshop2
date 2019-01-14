@@ -14,8 +14,7 @@
 | path to your installation.
 |
 */
-// $config['base_url']	= 'http://localhost/pos/';
-$config['base_url']	= 'http://localhost:81/Ajengshop2/';
+$config['base_url']	= 'http://ajeng-shop.online/';
 /*
 |--------------------------------------------------------------------------
 | Index File

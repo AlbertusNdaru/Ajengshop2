@@ -1,5 +1,5 @@
 <?php
-class model_operator extends CI_Model{
+class Model_operator extends CI_Model{
     
     
     
@@ -171,6 +171,11 @@ class model_operator extends CI_Model{
     
     function resetpassworduser($email,$password)
     {
-        return $this->db->query("UPDATE member set password='".$password."' where email = '".$email."'");
+        return $this->db->query("UPDATE member set password='".$password."',  gagallogin=0 where email = '".$email."'");
+    }
+
+     function resetpasswordadmin($email,$password)
+    {
+        return $this->db->query("UPDATE user set password='".$password."',  gagallogin=0 where email = '".$email."'");
     }
 }

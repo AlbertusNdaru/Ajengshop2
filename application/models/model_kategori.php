@@ -1,5 +1,5 @@
 <?php
-class model_kategori extends CI_Model{
+class Model_kategori extends CI_Model{
     
     
     

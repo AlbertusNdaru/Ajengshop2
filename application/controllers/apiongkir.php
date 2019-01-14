@@ -1,6 +1,6 @@
 <?php
 
-class apiongkir extends CI_Controller{
+class Apiongkir extends CI_Controller{
 
     function province()
     {

@@ -1,10 +1,10 @@
 <?php
-class auth extends CI_Controller{
+class Auth extends CI_Controller{
     
     function __construct() {
         parent::__construct();
-        $this->load->model('model_operator');
-        $this->load->model('model_user');
+        $this->load->model('Model_operator');
+        $this->load->model('Model_user');
          
         
     }
@@ -30,7 +30,7 @@ class auth extends CI_Controller{
             $password   =   $this->input->post('password');
             if(ceklastlogin($email))
             {
-                $hasil=  $this->model_operator->login($email,$password);
+                $hasil=  $this->Model_operator->login($email,$password);
                 if($hasil==0)
                 {
                     // update last login
@@ -51,9 +51,6 @@ class auth extends CI_Controller{
                }
             } 
             
-           
-            
-  
        
     }
     
@@ -88,7 +85,7 @@ class auth extends CI_Controller{
             $jawaban    =   $this->input->post('jawaban');
             $email    =   $this->input->post('email');
             $datauser = array('id_user'=>'','email'=>$email,'nama'=>$nama,'password'=>$password,'level'=>$level,'pertanyaannya'=>$pertanyaan,'jawabannya'=>$jawaban);
-            $hasil=  $this->model_user->register($datauser); 
+            $hasil=  $this->Model_user->register($datauser); 
             //echo json_encode($hasil);
             if($hasil==0)
             {
@@ -105,7 +102,7 @@ class auth extends CI_Controller{
     function lupapasswordadmin()
     {
         $id_user=$this->input->post('id_user');
-        $hasil = $this->model_operator->getUser($id_user)->row();
+        $hasil = $this->Model_operator->getUser($id_user)->row();
         echo json_encode($hasil);
     }
 
@@ -114,7 +111,7 @@ class auth extends CI_Controller{
         $i=$this->input->post('id_user');
         $p=$this->input->post('pertanyaannya');
         $j=$this->input->post('jawabannya');
-        $hasil = $this->model_operator->getUserCek($i,$p,$j)->num_rows();
+        $hasil = $this->Model_operator->getUserCek($i,$p,$j)->num_rows();
         echo $hasil;
 
     }
@@ -124,7 +121,7 @@ class auth extends CI_Controller{
         $i=$this->input->post('id_user');
         $p=$this->input->post('passbaru');
 
-        $this->model_operator->resetpasswordbaru($i,$p);
+        $this->Model_operator->resetpasswordbaru($i,$p);
         echo 1;
 
     }
@@ -151,6 +148,6 @@ class auth extends CI_Controller{
 
     function selectidkaryawan()
     {
-        echo json_encode($this->model_user->getKaryawan());
+        echo json_encode($this->Model_user->getKaryawan());
     }
 }
