@@ -16,6 +16,7 @@
   <link rel="stylesheet" href="<?php echo base_url('').'assets/'?>dist/css/AdminLTE.min.css">
   <!-- iCheck -->
   <link rel="stylesheet" href="<?php echo base_url('').'assets/'?>plugins/iCheck/square/blue.css">
+  <link rel="stylesheet" href="<?php echo base_url('').'assets/'?>dist/css/animate.css">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -30,7 +31,7 @@
 <body class="hold-transition login-page" style="overflow-y: hidden;">
 <div class="login-box">
   <div class="login-logo">
-    <a href="../../index2.html"><b>Admin Ajeng Shop</b></a>
+    <a href="#"><b>Admin Ajeng Shop</b></a>
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body"> 
@@ -89,14 +90,20 @@
 <script src="<?php echo base_url('').'assets/'?>/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- iCheck -->
 <script src="<?php echo base_url('').'assets/'?>plugins/iCheck/icheck.min.js"></script>
+<script src="<?php echo base_url('').'assets/'?>dist/js/bootstrap-notify.js"></script>
 <script>
+
+<?php if(!empty($error)){ ?> 
+ setnotif('<?php echo $error?>'); 
+ <?php }?>
+ 
 $("#password").keydown(function(e)
 {
   var keycode = (e.keyCode ? e.keyCode : e.which);
   if (keycode == '13'){
     login();    
   }
-})
+});
   $(function () {
     $('input').iCheck({
       checkboxClass: 'icheckbox_square-blue',
@@ -143,6 +150,58 @@ $("#password").keydown(function(e)
      })
      
  }
+ 
+ function setnotif(err)
+{ 
+
+
+  $.notify({
+	// options
+	icon: 'glyphicon glyphicon-warning-sign',
+	title: 'Error',
+	message: err,
+  },{
+    // settings
+    element: 'body',
+    position: null,
+    type: "danger",
+    allow_dismiss: true,
+    newest_on_top: false,
+    showProgressbar: false,
+    placement: {
+      from: "top",
+      align: "center"
+    },
+    offset: 20,
+    spacing: 10,
+    z_index: 1031,
+    delay: 5000,
+    timer: 1000,
+    url_target: '_blank',
+    mouse_over: null,
+    animate: {
+      enter: 'animated fadeInDown',
+      exit: 'animated fadeOutUp'
+    },
+    onShow: null,
+    onShown: null,
+    onClose: null,
+    onClosed: null,
+    icon_type: 'class',
+    template: '<div data-notify="container" class="col-xs-11 col-sm-3 alert alert-{0}" role="alert">' +
+      '<button type="button" aria-hidden="true" class="close" data-notify="dismiss">×</button>' +
+      '<span data-notify="icon"></span> ' +
+      '<span data-notify="title">{1}</span> ' +
+      '<span data-notify="message">{2}</span>' +
+      '<div class="progress" data-notify="progressbar">' +
+        '<div class="progress-bar progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>' +
+      '</div>' +
+      '<a href="{3}" target="{4}" data-notify="url"></a>' +
+    '</div>' 
+  });
+
+}
+
 </script>
 </body>
 </html>

@@ -51,6 +51,7 @@
 						</ul>
 					</nav>
 				</div>
+				</div>
 
 				<!-- Header Icon -->
 				<div class="header-icons">
@@ -78,7 +79,6 @@
 					</div>
 				</div>
 			</div>
-		</div>
 
 		<!-- Header Mobile -->
 		<div class="wrap_header_mobile">
@@ -97,14 +97,16 @@
 						
 					</a>
 					<ul class="dropdown-menu" style="background-color: white;border-radius: 7px;min-width: 100%;">
-                            <li><a style="color:black; margin-left:5px;" href="<?php echo base_url().'transaksi/get_data_transaksi_by_id'?>">Riwayat Transaksi</a></li>                           
+                            <li><a style="color:black; margin-left:5px;" href="<?php echo base_url().'transaksi/get_data_transaksi_by_id'?>">Riwayat Transaksi</a></li>     
+                            <li><a style="color:black; margin-left:5px;" href="<?php echo base_url()?>authuser/logout">Logout</a></li>  
                         </ul>
+                        
 
 					<span class="linedivide2"></span>
 
 					<div class="header-wrapicon2">
 					  <img src="<?php echo base_url('assets/member/')?>images/icons/icon-header-02.png" class="header-icon1 js-show-header-dropdown" alt="ICON">
-						<span id="cartpending2" class="header-icons-noti"></span>
+						<span id="cartpending2" class="header-icons-noti">0</span>
 
 						<!-- Header cart noti -->
 						<div id="cartdetail2" class="header-cart header-dropdown">

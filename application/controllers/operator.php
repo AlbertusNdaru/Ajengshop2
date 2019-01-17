@@ -75,19 +75,43 @@ class Operator extends ci_controller{
         //$this->template->load('template','operator/member',$data);
     }
 
-    function get_member_byemail()
+     function get_member_byemail()
     {
         $email= $this->input->get('email');
-        $data['member']= $this->Model_operator->get_one_user($email);
-        //echo json_encode($data['member']);
-        $this->load->view('user/lupapassword',$data);
+        $cek= $this->Model_operator->get_one_user($email);
+        if($cek)
+        {
+            $data['member'] = $cek;
+            $data['error'] = ''; 
+            $this->load->view('user/lupapassword',$data);
+        }
+        else
+        {
+            $data['error'] = 'Email Tidak Terdaftar!'; 
+            $this->load->view('user/login',$data);
+        }
+        //echo json_encode($data['member']);\
+
+       
     }
     function get_user_byemail()
     {
         $email= $this->input->get('email');
-        $data['member']= $this->Model_operator->get_one_user_admin($email);
+
+        $cek= $this->Model_operator->get_one_user_admin($email);
+        if($cek)
+        {
+            $data['member'] = $cek;
+            $data['error'] = ''; 
+            $this->load->view('admin/lupapassword',$data);
+        }
+        else
+        {
+            $data['error'] = 'Email Tidak Terdaftar!'; 
+            $this->load->view('admin/login',$data);
+        }
         //echo json_encode($data['member']);
-        $this->load->view('admin/lupapassword',$data);
+    
     }
 
 
@@ -98,6 +122,15 @@ class Operator extends ci_controller{
         //echo json_encode($data['member']);
         $this->load->view('user/lupapasswordemail',$data);
     }
+    
+     function get_admin_byemail_fromemail()
+    {
+        $id= $this->input->get('id');
+        $data['member']= $this->Model_operator->get_one_admin_byid($id);
+        //echo json_encode($data['member']);
+        $this->load->view('admin/lupapasswordemail',$data);
+    }
+
 
 
     function cekJawaban()

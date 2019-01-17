@@ -206,7 +206,7 @@
     <section class="sidebar">
       <!-- Sidebar user panel -->
        <?php
-       if ($_SESSION['userdata']->level==1)
+        if ($_SESSION['userdata']->level==1 || $_SESSION['userdata']->level==2 )
        {
         include('menusuperadmin.php');
        }

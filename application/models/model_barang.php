@@ -66,9 +66,9 @@ class Model_barang extends ci_model{
         return $this->db->query($query)->row();
     }
 
-    function tampil_data_by_name()
+     function tampil_data_by_name($nama)
     {
-        $nama =$this->input->post('nama');
+        
         $query= "SELECT*FROM barang where nama_barang like '%".$nama."%'";
         return $this->db->query($query);
     }

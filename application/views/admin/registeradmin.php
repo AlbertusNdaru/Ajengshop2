@@ -42,15 +42,15 @@
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input id="email" type="email" class="form-control" placeholder="Email">
+        <input id="email" type="email" onchange="validate()" class="form-control" placeholder="Email">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input id="password" type="password" class="form-control" placeholder="Password" >
+        <input id="password" type="password" onchange="validateregexpass()" class="form-control" placeholder="Password" >
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input id="validatepassword" type="password" class="form-control" placeholder="Retype password">
+        <input id="validatepassword" type="password" onchange="validatepass()" class="form-control" placeholder="Retype password">
         <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
@@ -99,6 +99,64 @@
       increaseArea: '20%' /* optional */
     });
   });
+  
+function validatepass()
+{
+    var pass = $('#password').val();
+    var valid = $('#validatepassword').val()
+    if (pass != valid)
+    {
+        alert('Password Tidak sama');
+        $('#validatepassword').focus();
+    }
+}
+
+function validate()
+{var regex = /^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/;
+    var email = $('#email').val();
+
+         $.ajax({
+        url: "<?php echo base_url('authuser/cekemail');?>",
+        type: 'POST',
+        data: {email:email},
+        success: function (dd) {
+          if (dd==1)
+          {
+            alert("Email sudah ada");
+            $('#save').attr('disabled','disabled');
+             $('#email').val('');
+             $('#email').focus();
+          }else if (!regex.test(email))
+            {
+               alert('Format email salah');
+                $('#email').val('');
+             $('#email').focus();
+            }
+          else
+          {
+              $('#save').removeAttr('disabled');
+          }
+ 
+        }
+    })
+    
+  
+}
+
+function validateregexpass()
+{
+     var regexpassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[_#$^+=!*()@%&]).{8,}$/;
+    var password =  $('#password').val();
+
+ if(!regexpassword.test(password))
+    {
+         alert('Password Harus Terdiri dari minimal 1 Huruf Capital 1 Huruf kecil dengan panjang karakter minimal 8  ');
+         $('#password').val('');
+         $('#password').focus();
+    }
+        
+  
+}
 
 
  function daftar()
@@ -111,7 +169,7 @@
    var pertanyaan = $('#pertanyaan').val();
    var jawaban = $('#jawaban').val();
    var regex = /^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/;
-   var regexpassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[_#$^+=!*()@%&]).{8,}$/;
+   var regexpassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[_+?#$^+=!*()@%&]).{8,}$/;
     if (!regex.test(email))
     {
        alert('Format email salah');
@@ -123,6 +181,9 @@
     else if (password != validatepassword)
     {
       alert('Password Tidak Sesuai');
+    }else if(nama=='' || validatepassword=='' || email=='' || password=='' || pertanyaan=='' || jawaban =='')
+    {
+        alert('Form Harap diisi dengan lengkap!');
     }
     else
     {

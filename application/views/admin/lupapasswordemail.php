@@ -30,7 +30,7 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="#"><b>Member Ajeng Shop</b></a>
+    <a href="#"><b>Admin Ajeng Shop</b></a>
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
@@ -103,7 +103,7 @@
     else
     {
       $.ajax({
-        url  :"<?php echo base_url('operator/resetpassworduser');?>",
+        url  :"<?php echo base_url('operator/resetpasswordadmin');?>",
         type : 'POST',
         data : {
           email : email,
@@ -114,7 +114,7 @@
           if (data==1)
           {
              alert('Password Berhasil diganti');
-             window.location="<?php echo base_url().'loginuser'?>"
+             window.location="<?php echo base_url().'loginadmin'?>"
           }
           else
           {

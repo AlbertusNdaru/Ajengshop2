@@ -57,7 +57,7 @@ function ceklastlogin($email=null)
 
 function ceklastloginuser($email=null)
 {  $CI= & get_instance();
-    $login_session_duration = 200; 
+    $login_session_duration = 300; 
     $lastlogin = $CI->db->query("SELECT lastlogin from member where email='".$email."'")->row() ;
     if($lastlogin)
     {

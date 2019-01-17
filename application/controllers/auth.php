@@ -19,7 +19,8 @@ class Auth extends CI_Controller{
            }
            else
            { 
-             $this->load->view('admin/login');
+            $data['error'] = ''; 
+            $this->load->view('admin/login',$data);
            }
     }
     function login()
@@ -60,7 +61,7 @@ class Auth extends CI_Controller{
   
             if(isset($_SESSION['userdata']->id_user))
             {
-                $this->db->query("update user set isLogin='N', gagallogin=0 where id_user='".$_SESSION['userdata']->id_user."'") ;
+                $this->db->query("update user set isLogin='N', gagallogin=0, lastlogin=0 where id_user='".$_SESSION['userdata']->id_user."'") ;
                 $this->session->sess_destroy();
                 redirect('loginadmin');
             }

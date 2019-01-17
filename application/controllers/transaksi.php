@@ -12,13 +12,31 @@ class Transaksi extends ci_controller{
         {
         $this->load->library('pagination');
         $config['base_url'] = base_url().'index.php/transaksi/index/';
-        $config['total_rows'] = $this->Model_transaksi->tampiltransaksi()->num_rows();
+        //$cektotal = $this->Model_transaksi->tampiltransaksi();
+        //if ($cektotal)
+        //{
+             $config['total_rows'] = $this->Model_transaksi->tampiltransaksi()->num_rows();
+        //}
+        //else
+        //{
+         //  $config['total_rows'] = 0;
+        //}
+        
         $config['per_page'] = 6; 
         $this->pagination->initialize($config); 
         $data['paging']     =$this->pagination->create_links();
         $halaman            =  $this->uri->segment(3);
         $halaman            =$halaman==''?0:$halaman-1;
-        $data['record']     =    $this->Model_transaksi->tampiltransaksipaging($config,$halaman);
+         //$cekisi =  $this->Model_transaksi->tampiltransaksipaging($config,$halaman);
+         //if ($cekisi)
+         //{
+              $data['record']     =    $this->Model_transaksi->tampiltransaksipaging($config,$halaman)->result();
+         //}
+         //else
+         //{
+          //    $data['record'] = array();;
+         //}
+       
         $this->template->load('template','admin/transaksi/view_transaksi',$data);
         }
     }
@@ -37,6 +55,13 @@ class Transaksi extends ci_controller{
         $this->Model_transaksi->hapusitem($id);
         redirect('transaksi');
     }
+    
+    function clearrecordtransaksi()
+    {
+        $this->Model_transaksi->clearrecord();
+        redirect('transaksi');
+    }
+    
     
     
     function selesai_belanja()

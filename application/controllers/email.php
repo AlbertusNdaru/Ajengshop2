@@ -8,7 +8,7 @@ class Email extends CI_Controller{
     function sendMailAdmin()
     {
 
-        
+        $id = $this->input->post('id');
         $email = $_POST['email'];
         $config = Array(
             'protocol' => 'smtp',
@@ -26,12 +26,12 @@ class Email extends CI_Controller{
         $this->email->to($email);
       
         $this->email->subject('Forget Password');
-        $this->email->message('Link reset password for Admin Ajeng Shop '.$email.'.
+        $this->email->message('Link reset password for Admin Ajeng Shop <br><br>
 
-        '.base_url().'get_member_byemail_fromemail?email='.$email. '.
+        '.base_url().'operator/get_admin_byemail_fromemail?id='.$id. '. <br><br>
 
-        Regard, 
-        Admin Ajeng Shop');
+        Regard, <br>
+        Super Admin Ajeng Shop');
         if (!$this->email->send()) {
             // Raise error message
             show_error($this->email->print_debugger());

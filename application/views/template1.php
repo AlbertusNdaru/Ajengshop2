@@ -157,6 +157,15 @@
 <script>
 total();
 pending();
+
+   $("#carinama").keypress(function(e)
+    {
+      var keycode = (e.keyCode ? e.keyCode : e.which);
+      if (keycode == '13'){
+        cari();    
+      }
+    });
+    
    var rest=[];
 		function addtocart(id,user)
 		{ 
@@ -291,9 +300,7 @@ function cart()
 							'</div>'
 			);
         
-		   }
-
-			$("#cartdetail2").empty();
+        	$("#cartdetail2").empty();
 			for (var i=0 ; i< cart.length;i++)
 			{
                 $("#cartdetail2").append(
@@ -319,12 +326,12 @@ function cart()
                 );
 				
 
-				total2=total+cart[i]['jumlah']*+cart[i]['harga'];
+				total2=total2+cart[i]['jumlah']*+cart[i]['harga'];
 			}
 
 			$("#cartdetail2").append(
 			   '<div class="header-cart-total">'+
-								'Total: Rp '+total2+
+								'Total: Rp '+total+
 							'</div>'+
 
 							'<div class="header-cart-buttons">'+
@@ -336,6 +343,8 @@ function cart()
 							'</div>'
 			);
         
+
+
 		   }
 
         }
@@ -347,6 +356,7 @@ function cek()
 {
 	window.location="<?php echo base_url().'penjualan/cartdetail'?>";
 }
+
 
 function cekout()
  {
@@ -423,11 +433,12 @@ function totalpending(count)
 function totalcartpending(data)
 {
 	       var total=0;
+	        var total1=0;
 			//console.log(data);
-			$("#cartdetail").empty();
+			$("#cartdetail3").empty();
 			for (var cart in data)
 			{
-                $("#cartdetail").append(
+                $("#cartdetail3").append(
                     '<ul class="header-cart-wrapitem">'+
 								'<li class="header-cart-item">'+
 									'<div class="header-cart-item-img">'+
@@ -452,7 +463,49 @@ function totalcartpending(data)
 				total=total+data[cart]['jml']*+data[cart]['hrg'];
 			}
               data2= JSON.stringify(data);
-			$("#cartdetail").append(
+			$("#cartdetail3").append(
+			   '<div class="header-cart-total">'+
+								'Total: Rp '+total+
+							'</div>'+
+
+							'<div class="header-cart-buttons">'+
+								'<div class="header-cart-wrapbtn" style="width: 100%;">'+
+									'<button onclick="cekoutpending('+total+')" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">'+
+										'Check Out'+
+									'</button>'+
+								'</div>'+
+							'</div>'
+			);
+			
+				$("#cartdetail4").empty();
+			for (var cart in data)
+			{
+                $("#cartdetail4").append(
+                    '<ul class="header-cart-wrapitem">'+
+								'<li class="header-cart-item">'+
+									'<div class="header-cart-item-img">'+
+										'<img style="height: 80px;width: 80px;" src="<?php echo base_url("assets/")?>img_product/'+data[cart]['foto']+'" alt="IMG">'+
+									'</div>'+
+
+									'<div class="header-cart-item-txt">'+
+										'<a href="#" class="header-cart-item-name">'+
+										data[cart]['nama']+
+										'</a>'+
+
+										'<span class="header-cart-item-info">'+
+											+data[cart]['jml']+' x '+data[cart]['hrg']+
+										'</span>'+
+									'</div>'+
+								'</li>'+
+
+							'</ul>'
+			
+                );
+
+				total1=total1+data[cart]['jml']*+data[cart]['hrg'];
+			}
+
+			$("#cartdetail4").append(
 			   '<div class="header-cart-total">'+
 								'Total: Rp '+total+
 							'</div>'+
@@ -493,6 +546,5 @@ function cekoutpending(total)
 		}
 total();
 get_city();
-
 
 </script>

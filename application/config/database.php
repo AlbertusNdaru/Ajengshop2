@@ -49,14 +49,14 @@ $active_group = 'default';
 $active_record = TRUE;
 
 $db['default']['hostname'] = 'localhost';
-$db['default']['username'] = 'ajengsho_user';
-$db['default']['password'] = 'Jarumblack1234!';
-$db['default']['database'] = 'ajengsho_ajengshop';
+$db['default']['username'] = 'root';
+$db['default']['password'] = '!';
+$db['default']['database'] = 'ajengshop';
 
 $db['default']['dbdriver'] = 'mysqli';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;
-$db['default']['db_debug'] = FALSE;
+$db['default']['db_debug'] = TRUE;
 $db['default']['cache_on'] = FALSE;
 $db['default']['cachedir'] = '';
 $db['default']['char_set'] = 'utf8';

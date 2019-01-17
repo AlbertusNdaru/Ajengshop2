@@ -137,7 +137,7 @@
 				</ul>
 				<!-- Tab panes -->
 				<div class="tab-content p-t-35">
-					<div class="tab-pane fade show" id="new" role="tabpanel">
+					<div class="tab-pane fade show active" id="new" role="tabpanel">
 						<div class="row">
                         <?php $no=1; foreach ($new->result() as $data) { ?>
 							<div class="col-sm-6 col-md-4 col-lg-3 p-b-50">

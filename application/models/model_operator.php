@@ -151,6 +151,12 @@ class Model_operator extends CI_Model{
        
         return $this->db->Query("SELECT * from member where id_member='".$id."'")->row();
     }
+    
+    function get_one_admin_byid($id)
+    {
+       
+        return $this->db->Query("SELECT * from user where id_user='".$id."'")->row();
+    }
 
     function cekjawabanuser($email,$pertanyaan,$jawaban)
     {

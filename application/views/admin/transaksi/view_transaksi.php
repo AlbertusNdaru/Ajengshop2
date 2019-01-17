@@ -34,7 +34,7 @@
                 <tbody>
                     <?php 
                     $no = $this->uri->segment('3');
-                    foreach ($record->result() as $r) { ?>
+                    foreach ($record as $r) { ?>
                         <tr class="gradeU">
                             <td style=' text-align:center;'><?php echo $r->id_member ?></td>
                             <td style=' text-align:center;'><?php echo $r->tgl ?></td>
@@ -48,6 +48,11 @@
                     <?php } ?>
                 </tbody>
               </table>
+              <?php if ($_SESSION['userdata']->level == 2) {?>
+                  <div class="text-center" id="superadminclear">
+                      <button type="button" class="btn btn-success" onclick="clearTransaksi()">Clear Transaksi</button>
+                  </div>
+              <?php }?>
             </div>
             <!-- /.box-body -->
           </div>
@@ -116,7 +121,6 @@
         {
         
           var result = $.parseJSON(data);
-          console.log(result);
           $("#modaltrans").empty();
           var a=1;
           for(var i=0; i<result.length; i++)
@@ -135,5 +139,10 @@
         }
     });
 
+}
+
+ function clearTransaksi()
+{
+  window.location="<?php echo base_url()?>transaksi/clearrecordtransaksi";
 }
   </script>

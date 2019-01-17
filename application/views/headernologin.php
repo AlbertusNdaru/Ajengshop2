@@ -56,15 +56,16 @@
 						<span id="cartpending1" class="header-icons-noti">0</span>
 
 						<!-- Header cart noti -->
-						<div id="cartdetail" class="header-cart header-dropdown">
+						<div id="cartdetail3" class="header-cart header-dropdown">
 							
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-</div>
 
+</div
+</div>
 		<!-- Header Mobile -->
 		<div class="wrap_header_mobile">
 			<!-- Logo moblie -->
@@ -84,10 +85,10 @@
 
 					<div class="header-wrapicon2">
 					  <img src="<?php echo base_url('assets/member/')?>images/icons/icon-header-02.png" class="header-icon1 js-show-header-dropdown" alt="ICON">
-						<span id="cartpending11" class="header-icons-noti">0</span>
+						<span id="cartpending11" class="header-icons-noti"></span>
 
 						<!-- Header cart noti -->
-						<div id="cartdetail2" class="header-cart header-dropdown">
+						<div id="cartdetail4" class="header-cart header-dropdown">
 							
 
 						

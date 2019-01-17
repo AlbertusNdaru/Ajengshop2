@@ -15,15 +15,17 @@ class Authuser extends CI_Controller{
            {
                redirect('product');
            }
-           else
+            else
            { 
-            $this->load->view('user/login');
+            $data['error'] = ''; 
+            $this->load->view('user/login',$data);
            }
     }
 
     function logincekout()
     {
-        $this->load->view('user/login');
+        $data['error'] = ''; 
+        $this->load->view('user/login',$data);
     }
     function login()
     {
@@ -74,7 +76,7 @@ class Authuser extends CI_Controller{
     function logout()
     {
 
-                $this->db->query("update member set isLogin='N', gagallogin=0 where id_member='".$_SESSION['userdata']->id_member."'") ;
+                $this->db->query("update member set isLogin='N', gagallogin=0, lastlogin=0 where id_member='".$_SESSION['userdata']->id_member."'") ;
                 $this->session->sess_destroy();
                 redirect('penjualan');
     }
@@ -100,15 +102,11 @@ class Authuser extends CI_Controller{
             $hasil=  $this->Model_user->registeruser($datauser); 
             $this->aksi_upload();
             //echo json_encode($_FILES['files']);
-            if($hasil==0)
+           if($hasil==0)
             {
-             echo 0;
+             redirect('loginuser');
                 
             }
-             else{
-                echo 1;
-                
-             } 
       
     }
    

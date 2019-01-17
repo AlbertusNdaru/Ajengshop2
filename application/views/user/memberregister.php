@@ -34,7 +34,7 @@
   </div>
 
   <div class="register-box-body">
-
+ <?php echo form_open_multipart("authuser/register")?>
     <p class="login-box-msg">Register a new Member</p>
       <div class="form-group has-feedback">
         <input required id="nama" type="text" name="nama" class="form-control" placeholder="Full name">
@@ -49,7 +49,7 @@
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input required id="password" name="password" type="password" class="form-control" placeholder="Password" pattern ="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$^+=!*()@%&]).{8,}">
+        <input required id="password" name="password" type="password" onchange="validateregexpass()" class="form-control" placeholder="Password" pattern ="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[_#$^+=!*()@%&]).{8,}">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
@@ -64,7 +64,7 @@
         <input required id="jawaban" name="jawaban" type="jawaban" class="form-control" placeholder="Jawaban">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
-      <?php echo form_open_multipart("authuser/register")?>
+     
       <div class="form-group has-feedback">
       <label>Upload Foto</label>
          <input required id="inputfoto" accept="image/x-png,image/gif,image/jpeg" type="file" class="form-control" name="berkas" placeholder="upload" >
@@ -77,12 +77,12 @@
             </label>
           </div>
         </div>
-  </form>
+  
         <!-- /.col -->
         <div class="col-xs-4">
-          <button id="save" type="submit" onclick="daftarmember()" class="btn btn-primary btn-block btn-flat">Register</button>
+          <button id="save" type="submit" class="btn btn-primary btn-block btn-flat">Register</button>
         </div>
-    
+    </form>
         <!-- /.col -->
       </div>
       
@@ -117,12 +117,13 @@ function validatepass()
     if (pass != valid)
     {
         alert('Password Tidak sama');
+           $('#validatepassword').val('');
         $('#validatepassword').focus();
     }
 }
 
 function validate()
-{
+{var regex = /^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/;
     var email = $('#email').val();
 
          $.ajax({
@@ -134,8 +135,14 @@ function validate()
           {
             alert("Email sudah ada");
             $('#save').attr('disabled','disabled');
+             $('#email').val('');
              $('#email').focus();
-          }
+          }else if (!regex.test(email))
+            {
+               alert('Format email salah');
+                $('#email').val('');
+             $('#email').focus();
+            }
           else
           {
               $('#save').removeAttr('disabled');
@@ -146,6 +153,23 @@ function validate()
     
   
 }
+
+function validateregexpass()
+{
+     var regexpassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[_#$^+=!*()@%&]).{8,}$/;
+    var password =  $('#password').val();
+
+ if(!regexpassword.test(password))
+    {
+         alert('Password Harus Terdiri dari minimal 1 Huruf Capital 1 Huruf kecil dengan panjang karakter minimal 8  ');
+         $('#password').val('');
+         $('#password').focus();
+    }
+        
+  
+}
+
+
 
 
  function daftarmember()
@@ -173,7 +197,7 @@ function validate()
     else if (password != validatepassword)
     {
       alert('Password Tidak Sesuai');
-    }
+    } 
     else
     {
       $.ajax({
